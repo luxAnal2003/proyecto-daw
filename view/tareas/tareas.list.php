@@ -85,16 +85,16 @@
             <tbody class="tabladatos">
                 <?php foreach ($resultados as $fila) { ?>
                 <tr>
-                    <td><?php echo $fila['tareas_nombre']; ?></td>
-                    <td><?php echo $fila['tareas_descripcion']; ?></td>
-                    <td><?php echo $fila['tareas_estado']; ?></td>
-                    <td><?php echo $fila['tareas_prioridad']; ?></td>
+                    <td><?php echo $fila['nombre']; ?></td>
+                    <td><?php echo $fila['descripcion']; ?></td>
+                    <td><?php echo $fila['estado']; ?></td>
+                    <td><?php echo $fila['prioridad']; ?></td>
                     <td><?php echo $fila['tiempo_estimado']; ?></td>
                     <td>
-                        <a class="btn btn-warning btn-sm me-2" href="index.php?c=tareas&f=view_edit&id=<?php echo $fila['tareas_id']; ?>">
+                        <a class="btn btn-warning btn-sm me-2" href="index.php?c=tareas&f=view_edit&id=<?php echo $fila['id']; ?>">
                             <i class="fas fa-edit"></i> Editar
                         </a>
-                        <a class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar la tarea?');" href="index.php?c=tareas&f=delete&id=<?php echo $fila['tareas_id']; ?>">
+                        <a class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar la tarea?');" href="index.php?c=tareas&f=delete&id=<?php echo $fila['id']; ?>">
                             <i class="fas fa-trash-alt"></i> Eliminar
                         </a>
                     </td>

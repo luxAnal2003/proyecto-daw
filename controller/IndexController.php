@@ -14,7 +14,15 @@ class IndexController {
          
         }
     }
- 
+    
+    public function logout() {
+        session_start();
+        session_destroy();
+        unset($_SESSION['usuario_nombre']);
+        unset($_SESSION['usuario_rol']);
+        header('Location: index.php');
+        exit;
+    }
     
 }
 ?>

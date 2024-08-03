@@ -24,13 +24,15 @@ class AsignacionesController {
     }
 
     public function search() {
-        // lectura de parámetros enviados
+        // Leer el parámetro de búsqueda enviado por el formulario
         $parametro = (!empty($_POST["b"])) ? htmlentities($_POST["b"]) : "";
-        // comunica con el modelo (enviar datos o obtener datos)
+        
+        // Comunicar con el modelo
         $resultados = $this->model->selectAll($parametro);
-        // comunicarnos a la vista
+        
+        // Llamar a la vista con los resultados
         $titulo = "Buscar asignaciones";
-        require_once VASIGNACIONES.'list.php';
+        require_once VASIGNACIONES . 'list.php';
     }
 
     // muestra el formulario de nueva asignación
@@ -132,51 +134,66 @@ class AsignacionesController {
         // llamar a la vista
         header('Location:index.php?c=Asignaciones&f=index');
     }
-    
 
-    // muestra el formulario de editar asignación
     public function view_edit() {
-        $id = $_GET['id']; // Verificar y limpiar
+        $id = $_GET['id'];
         $asignacion = $this->model->selectOne($id);
-
-        // Verifica que la asignación existe
+    
         if (!$asignacion) {
             $_SESSION['mensaje'] = "Asignación no encontrada";
             $_SESSION['color'] = "danger";
             header('Location:index.php?c=asignaciones&f=index');
             exit();
         }
+    
+        // Convertir stdClass a objeto Asignaciones si es necesario
+        $asignacionObj = new Asignaciones(
+            $asignacion->id,
+            $asignacion->tarea_id,
+            $asignacion->tarea_nombre,
+            $asignacion->usuario_id,
+            $asignacion->estado
+        );
+    
+        // Obtener tareas para el select
+        $tareasDAO = new TareasDAO();
+        $tareas = $tareasDAO->selectAll();
+    
         // Obtener usuarios para el select
         $usuariosDAO = new UsuariosDAO();
         $usuarios = $usuariosDAO->selectEmpleados();
-
+    
         $titulo = "Editar Asignación";
         require_once VASIGNACIONES.'edit.php';
     }
+
     
     // lee datos del formulario de editar asignación y lo actualiza en la BDD (llamando al modelo)
     public function edit() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $asignacion = new Asignaciones();
-            $asignacion->setId(htmlentities($_POST['id']));
-            $asignacion->setTareaId(htmlentities($_POST['tarea_id']));
-            $asignacion->setUsuarioId(htmlentities($_POST['usuario_id']));
-
-            $exito = $this->model->update($asignacion);
-            
+        $id = $_POST['id'];
+        $tarea_id = $_POST['tarea_id'];
+        $usuario_id = $_POST['usuario_id'];
+        $estado = $_POST['estado'];
+    
+        $asignacion = new Asignaciones();
+        $asignacion->setId($id);
+        $asignacion->setTareaId($tarea_id);
+        $asignacion->setUsuarioId($usuario_id);
+        $asignacion->setEstado($estado);
+    
+        $resultado = $this->model->update($asignacion);
+    
+        // Verifica si la actualización fue exitosa
+        if ($resultado) {
             $msj = 'Asignación actualizada exitosamente';
             $color = 'primary';
-            if (!$exito) {
-                $msj = "No se pudo realizar la actualización";
-                $color = "danger";
-            }
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-            $_SESSION['mensaje'] = $msj;
-            $_SESSION['color'] = $color;
-            
-            header('Location:index.php?c=asignaciones&f=index');
+            header('Location:index.php?c=Asignaciones&f=index');
+        } else {
+            $msj = "No se pudo realizar la actualización";
+            $color = "danger";
         }
+        exit();
     }
+    
+    
 }

@@ -1,4 +1,3 @@
-<!-- view_edit_assignment.php -->
 <?php require_once HEADER; ?>
 
 <div class="container">
@@ -8,17 +7,38 @@
             <input type="hidden" name="id" id="id" value="<?php echo $asignacion->id; ?>"/>
             <div class="form-row">
                 <div class="form-group col-sm-6">
-                    <label for="tarea">Tarea</label>
-                    <input type="text" name="tarea" id="tarea" value="<?php echo $asignacion->tarea_nombre; ?>" class="form-control" placeholder="Descripción de la tarea" required>
+                    <label for="tarea_id">Tarea</label>
+                    <select id="tarea_id" name="tarea_id" class="form-control">
+                        <?php foreach ($tareas as $tarea) {
+                            $selected = ($tarea->id == $asignacion->tarea_id) ? 'selected' : '';
+                        ?>
+                        <option value="<?php echo $tarea->id; ?>" <?php echo $selected; ?>>
+                            <?php echo $tarea->nombre; ?>
+                        </option>
+                        <?php } ?>
+                    </select>
                 </div>
                 <div class="form-group col-sm-6">
-                    <label for="usuario">Usuario</label>
-                    <select id="usuario" name="usuario" class="form-control">
+                    <label for="usuario_id">Usuario</label>
+                    <select id="usuario_id" name="usuario_id" class="form-control">
                         <?php foreach ($usuarios as $usuario) {
                             $selected = ($usuario->id == $asignacion->usuario_id) ? 'selected' : '';
                         ?>
                         <option value="<?php echo $usuario->id; ?>" <?php echo $selected; ?>>
                             <?php echo $usuario->nombre; ?>
+                        </option>
+                        <?php } ?>
+                    </select>
+                </div>
+            
+                <div class="form-group col-sm-6">
+                    <label for="estado">Estado</label>
+                    <select id="estado" name="estado" class="form-control">
+                        <?php foreach ([['id' => 0, 'nombre' => 'Inactivo'], ['id' => 1, 'nombre' => 'Activo']] as $estado) {
+                            $selected = ($estado['id'] == $asignacion->estado) ? 'selected' : '';
+                        ?>
+                        <option value="<?php echo $estado['id']; ?>" <?php echo $selected; ?>>
+                            <?php echo $estado['nombre']; ?>
                         </option>
                         <?php } ?>
                     </select>

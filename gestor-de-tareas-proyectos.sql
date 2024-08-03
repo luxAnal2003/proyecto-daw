@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Proyectos (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     usuario_creacion INT,
-    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    estado int(1) NOT NULL DEFAULT 1,
     FOREIGN KEY (usuario_creacion) REFERENCES Usuarios(id)
 );
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS Tareas (
     prioridad ENUM('Baja', 'Media', 'Alta'),
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     proyecto_id INT,
-    estado ENUM('pendiente', 'en progreso', 'completada') DEFAULT 'pendiente',
+    estado int(1) NOT NULL DEFAULT 1,
     FOREIGN KEY (proyecto_id) REFERENCES Proyectos(id)
 );
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS Asignaciones (
     gestor_id INT, 
     proyecto_id INT,
     fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado ENUM('pendiente', 'aceptada', 'rechazada') DEFAULT 'pendiente',
+    estado int(1) NOT NULL DEFAULT 1,
     FOREIGN KEY (tarea_id) REFERENCES Tareas(id),
     FOREIGN KEY (usuario_id) REFERENCES Usuarios(id),
     FOREIGN KEY (gestor_id) REFERENCES Usuarios(id), 
@@ -89,23 +89,23 @@ INSERT INTO Proyectos (nombre, descripcion, usuario_creacion) VALUES
 
 -- Tareas del Proyecto1
 INSERT INTO Tareas (nombre, descripcion, tiempo_estimado, prioridad, proyecto_id, estado) VALUES 
-('Diseño de la interfaz', 'Diseño de la interfaz de usuario para la aplicación web.', '2 días', 'Media', 1, 'pendiente'),
-('Desarrollo del backend', 'Desarrollo del backend de la aplicación web.', '5 días', 'Alta', 1, 'pendiente');
+('Diseño de la interfaz', 'Diseño de la interfaz de usuario para la aplicación web.', '2 días', 'Media', 1, 1),
+('Desarrollo del backend', 'Desarrollo del backend de la aplicación web.', '5 días', 'Alta', 1, 1);
 
 -- Tareas del Proyecto2
 INSERT INTO Tareas (nombre, descripcion, tiempo_estimado, prioridad, proyecto_id, estado) VALUES 
-('Modelado de la base de datos', 'Creación del modelo de base de datos para el programa contable.', '3 días', 'Alta', 2, 'pendiente'),
-('Implementación de la lógica contable', 'Desarrollo de la lógica contable en el programa.', '4 días', 'Media', 2, 'pendiente');
+('Modelado de la base de datos', 'Creación del modelo de base de datos para el programa contable.', '3 días', 'Alta', 2, 1),
+('Implementación de la lógica contable', 'Desarrollo de la lógica contable en el programa.', '4 días', 'Media', 2, 1);
 
 -- Tareas del Proyecto3
 INSERT INTO Tareas (nombre, descripcion, tiempo_estimado, prioridad, proyecto_id, estado) VALUES 
-('Desarrollo del módulo de compra', 'Desarrollo del módulo para la compra de boletos.', '6 días', 'Alta', 3, 'pendiente'),
-('Desarrollo del módulo de venta', 'Desarrollo del módulo para la venta de boletos.', '4 días', 'Media', 3, 'pendiente');
+('Desarrollo del módulo de compra', 'Desarrollo del módulo para la compra de boletos.', '6 días', 'Alta', 3, 1),
+('Desarrollo del módulo de venta', 'Desarrollo del módulo para la venta de boletos.', '4 días', 'Media', 3, 1);
 
 -- Tareas del Proyecto4
 INSERT INTO Tareas (nombre, descripcion, tiempo_estimado, prioridad, proyecto_id, estado) VALUES 
-('Análisis del sistema actual', 'Análisis del sistema de facturación actual.', '2 días', 'Baja', 4, 'pendiente'),
-('Diseño de mejoras', 'Diseño de mejoras para el sistema de facturación.', '3 días', 'Media', 4, 'pendiente');
+('Análisis del sistema actual', 'Análisis del sistema de facturación actual.', '2 días', 'Baja', 4, 1),
+('Diseño de mejoras', 'Diseño de mejoras para el sistema de facturación.', '3 días', 'Media', 4, 1);
 
 INSERT INTO Asignaciones (tarea_id, usuario_id, gestor_id, proyecto_id) VALUES 
 (1, 4, 2, 1),

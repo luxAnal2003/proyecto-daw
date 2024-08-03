@@ -76,36 +76,36 @@ class ProductosDAO {
         return true;
     }
 
-    public function update($prod){
-
-        try{
-            //prepare
-            $sql = "UPDATE productos SET prod_nombre=:nom," .
-                    "prod_estado=:estado,prod_precio=:precio,prod_idCategoria=:idCat,prod_usuarioActualizacion=:usu," .
-                    "prod_fechaActualizacion=:fecha WHERE prod_id=:id";
-           //bind parameters
-            $sentencia = $this->con->prepare($sql);
-            $data = array(
-               'nom' =>  $prod->getNombre(),
-                'estado' =>  $prod->getEstado(),
-                'precio' =>  $prod->getPrecio(),
-                'idCat' =>  $prod->getIdCategoria(),
-                'usu' =>  $prod->getUsuario(),
-                'fecha' =>  $prod->getFechaActualizacion(),
-                'id' =>  $prod->getId()
-        );
-            //execute
-            $sentencia->execute($data);
-            //retornar resultados, 
-            if ($sentencia->rowCount() <= 0) {// verificar si se inserto 
-                //rowCount permite obtner el numero de filas afectadas
-                return false;
-            }
-        }catch(Exception $e){
-          echo $e->getMessage();
+    public function update($asignacion) {
+        try {
+            // SQL para actualizar una asignación existente
+            $sql = "UPDATE asignaciones SET 
+                    tarea_id = :tarea_id, 
+                    usuario_id = :usuario_id, 
+                    gestor_id = :gestor_id, 
+                    proyecto_id = :proyecto_id, 
+                    fecha_asignacion = :fecha_asignacion, 
+                    estado = :estado 
+                    WHERE id = :id";
+                    
+            // Preparar y ejecutar la sentencia
+            $stmt = $this->con->prepare($sql);
+            $data = [
+                'tarea_id' => $asignacion->getTareaId(),
+                'usuario_id' => $asignacion->getUsuarioId(),
+                'gestor_id' => $asignacion->getGestorId(),
+                'proyecto_id' => $asignacion->getProyectoId(),
+                'fecha_asignacion' => $asignacion->getFechaAsignacion(),
+                'estado' => $asignacion->getEstado(),
+                'id' => $asignacion->getId()
+            ];
+            $stmt->execute($data);
+            
+            return $stmt->rowCount() > 0;
+        } catch (Exception $e) {
+            echo $e->getMessage();
             return false;
         }
-            return true;       
     }
 
    public function delete($prod){

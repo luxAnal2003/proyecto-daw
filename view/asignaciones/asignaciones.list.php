@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-6">
             <form action="index.php?c=asignaciones&f=search" method="POST">
-                <input type="text" name="b" id="busqueda" placeholder="buscar..."/>
+                <input type="text" name="b" id="form-control" placeholder="buscar..."/>
                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>Buscar</button>
             </form>       
         </div>

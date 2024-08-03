@@ -20,8 +20,11 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
         href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" 
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" 
         crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
 
-        <title>Productos</title>
+
+        <title>Product</title>
     </head> 
     <body>
         <nav class="barraNavegacion navbar navbar-expand-md navbar-dark fixed-top">
@@ -32,16 +35,13 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
                 <li class="nav-item"><a class="nav-link" href="index.php?c=index&f=index&p=nosotros">Nosotros</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?c=Productos&f=index">Productos</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?c=Categorias&f=index">Categorias</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php?c=Tareas&f=index">Tareas</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?p=contacto">Contacto</a></li>
-                                                          
+                <a class="nav-link" href="/mvc/view/plantillas/plantillas.php">Plantillas</a></li>
                
                <?php
-                 if($_SESSION['rol']=1 ){ //simulacion manejo de variables de sesion?>
-                   
-                   <li class="nav-item"><a class="nav-link" href="index.php?c=Pedidos&f=index">
-                       Pedidos</a></li>
+                 if($_SESSION['usuario_rol']=2 ){ //si el rol es gestor, podra ver esta seccion?>
                     <li class="nav-item"><a class="nav-link" href="index.php?c=Asignaciones&f=index">Asignaciones</a></li>
-
                     <?php
                  }
                 ?>
@@ -52,7 +52,6 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
 
             </ul>
         </nav>
-
         <h1 class="jumbotron text-center titNivel1">
             <i class="fab fa-shopify"></i>
             Gestor de Proyectos </h1>

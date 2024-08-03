@@ -9,17 +9,19 @@ class TareasDAO {
     }
    
    
-    public function selectAll($proyecto_id = '') {
-        $sql = "SELECT id, nombre FROM tareas";
-        if (!empty($proyecto_id)) {
-            $sql .= " WHERE proyecto_id = :proyecto_id";
-        }
+    public function selectAll($parametro) {
+        // SQL de la sentencia
+        $sql = "SELECT * FROM tareas WHERE nombre LIKE :b1";
         $stmt = $this->con->prepare($sql);
-        if (!empty($proyecto_id)) {
-            $stmt->bindValue(':proyecto_id', $proyecto_id);
-        }
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        // Preparar la sentencia
+        $conlike = '%' . $parametro . '%';
+        $data = array('b1' => $conlike);
+        // Ejecutar la sentencia
+        $stmt->execute($data);
+        // Recuperar resultados
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Retornar resultados
+        return $resultados;
     }
 
 
@@ -32,11 +34,16 @@ class TareasDAO {
     }
 
     public function selectOne($id) {
-        $sql = "SELECT * FROM tareas WHERE id = :id";
+        $sql = "select * from tareas where ".
+        "tareas_id =:id";
+        // preparar la sentencia
         $stmt = $this->con->prepare($sql);
         $data = ['id' => $id];
+        // ejecutar la sentencia
         $stmt->execute($data);
-        $tareas = $stmt->fetch(PDO::FETCH_ASSOC);
+        // recuperar los datos (en caso de select)
+        $tareas = $stmt->fetch(PDO::FETCH_ASSOC);// fetch retorna el primer registro
+        // retornar resultados
         return $tareas;
     }
 
@@ -92,19 +99,26 @@ class TareasDAO {
 
     public function delete($id) {
         try {
-            $this->con->beginTransaction();
-
+            // Prepare
             $sql = "DELETE FROM tareas WHERE id=:id";
-            $stmt = $this->con->prepare($sql);
-            $data = ['id' => $id];
-            $stmt->execute($data);
-
-            $this->con->commit();
-            return true;
-        } catch (Exception $e) {
-            $this->con->rollBack();
-            throw $e;
+            
+            // Bind parameters
+            $sentencia = $this->con->prepare($sql);
+            $data = array('id' => $tareas->getId());
+    
+            // Execute
+            $sentencia->execute($data);
+            
+            // Retornar resultados
+            if ($sentencia->rowCount() <= 0) { // Verificar si se eliminó
+                return false;
+            }
+        } catch(Exception $e) {
+            echo $e->getMessage();
+            return false;
         }
+        
+        return true;
     }
 }
 ?>

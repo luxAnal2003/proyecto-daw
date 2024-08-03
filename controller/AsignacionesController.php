@@ -157,7 +157,7 @@ class AsignacionesController {
     
         // Obtener tareas para el select
         $tareasDAO = new TareasDAO();
-        $tareas = $tareasDAO->selectAll();
+        $tareas = $tareasDAO->selectAll("");
     
         // Obtener usuarios para el select
         $usuariosDAO = new UsuariosDAO();

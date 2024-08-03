@@ -28,13 +28,11 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
     </head> 
     <body>
         <nav class="barraNavegacion navbar navbar-expand-md navbar-dark fixed-top">
-            <a class="navbar-brand" href="index.php">Mi Tienda</a>
+            <a class="navbar-brand" href="index.php">Mis tareas y proyectos</a>
             <ul class="navbar-nav mr-auto">
                 <!--crear enlaces segùn perfil de usuario-->
                 <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?c=index&f=index&p=nosotros">Nosotros</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.php?c=Productos&f=index">Productos</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.php?c=Categorias&f=index">Categorias</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?c=Tareas&f=index">Tareas</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?p=contacto">Contacto</a></li>
                 <a class="nav-link" href="/mvc/view/plantillas/plantillas.php">Plantillas</a></li>
@@ -49,7 +47,6 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item my-auto"><span style="color:white">Usuario </span></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?c=index&f=index&p=login">Login</a></li>
-
             </ul>
         </nav>
         <h1 class="jumbotron text-center titNivel1">

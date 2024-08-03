@@ -10,10 +10,10 @@
                     <label for="tarea_id">Tarea</label>
                     <select id="tarea_id" name="tarea_id" class="form-control">
                         <?php foreach ($tareas as $tarea) {
-                            $selected = ($tarea->id == $asignacion->tarea_id) ? 'selected' : '';
+                            $selected = ($tarea['id'] == $asignacion->tarea_id) ? 'selected' : '';
                         ?>
-                        <option value="<?php echo $tarea->id; ?>" <?php echo $selected; ?>>
-                            <?php echo $tarea->nombre; ?>
+                        <option value="<?php echo $tarea['id']; ?>" <?php echo $selected; ?>>
+                            <?php echo $tarea['nombre']; ?>
                         </option>
                         <?php } ?>
                     </select>

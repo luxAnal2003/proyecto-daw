@@ -25,7 +25,7 @@
             text-align: center; 
         }
         .categoriasDestacadas img {
-            width: 40px;
+            width:  90px;
             height: auto;
             cursor: pointer;
         }
@@ -62,33 +62,94 @@
         .contenidoEducacion figcaption {
             font-weight: bold;
         }
+        /* Lado izquierdo */
+        #contenedorPrincipal{
+        display: flex;
+        margin-top: 5%
+            }
+
+        #sectionIzquierda{
+            display: flex;
+            margin-left: 15%;
+            flex-direction: column;
+            align-items: center;
+            background-color: #E7ECEF;
+            width: 13%;
+            height: 70vh;
+            border-radius: 5px;
+            }
+
+        .itemsSection{
+            display: flex;
+            background-color: #6096BA;
+            width: 95%;
+            height: 30px;
+            margin-bottom: 10px;
+            align-items: center;
+            border-radius: 5px;
+            font-size: 14px;
+            }
+
+        .itemsSection img{
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            margin-left: 10px;
+
+
+        }
+        .itemsSection:nth-child(1){
+            margin-top: 20%;
+        }
+        .lineaDivisoria{
+        background-color: #8B8C89;
+            width: 100%;
+            height: 1px;
+            opacity: 50%;
+        }
+        .tituloDivisorio{
+            width: 100%;
+            height: 4%;
+            font-size: 10px;
+
+        }
+        .tituloDivisorio p{
+            margin-left: 10px;
+            color: #858181;
+            font-weight: bold;
+        }
+        .itemsSection:hover{
+            background-color: #A3CEF1;
+            transition: 0.1s;
+        }
+
     </style>
     <script>
         function PlantillaLibros_encendido(enlace) {
             let img = document.querySelector("#LibrosapiladosEducacion");  
-            img.src = "img/Plantilla_libro_funcion.png";
+            img.src = "/mvc/assets/images/Plantilla_libro_funcion.png";
         }
         function PlantillaLibros_apagado(enlace) {
             let img = document.querySelector("#LibrosapiladosEducacion");
-            img.src = "img/eduacionlibrosaplidados.jpg";
+            img.src = "/mvc/assets/images/eduacionlibrosaplidados.jpg";
             img.style.border = "none";
         }
         function PlantillaMedicina_encendido(enlace) {
             let img = document.querySelector("#Medicina");  
-            img.src = "img/Plantilla_Medicina_funcion.jpg";
+            img.src = "/mvc/assets/images/Plantilla_Medicina_funcion.jpg";
         }
         function PlantillaMedicina_apagado(enlace) {
             let img = document.querySelector("#Medicina");
-            img.src = "img/Educacionmedicina.jpg";
+            img.src = "/mvc/assets/images/Educacionmedicina.jpg";
             img.style.border = "none";
         }
         function PlantillaPlantas_encendido(enlace) {
             let img = document.querySelector("#Plantas");  
-            img.src = "img/Plantilla_Plantas_funcion.jpg";
+            img.src = "/mvc/assets/images/Plantilla_Plantas_funcion.jpg";
         }
         function PlantillaPlantas_apagado(enlace) {
             let img = document.querySelector("#Plantas");
-            img.src = "img/Educacionplantasflores.webp";
+            img.src = "/mvc/assets/images/Educacionplantasflores.webp";
             img.style.border = "none";
         }
     </script>
@@ -98,27 +159,27 @@
         <div id="contenedorPrincipal">
             <div id="sectionIzquierda">
                 <div class="itemsSection">
-                    <img src="img/imgTableros.png" alt="imagen tablero">
+                    <img src="/mvc/assets/images/imgTableros.png" alt="imagen tablero">
                     <a href="tableros.html"><b>Tableros</b></a>
                 </div>
                 <div class="itemsSection">
-                    <img src="img/imgPlantillas.png" alt="imagen tablero">
+                    <img src="/mvc/assets/images/imgPlantillas.png" alt="imagen tablero">
                     <a href="plantillas.html"><b>Plantillas</b></a>
                 </div>
                 <div class="itemsSection">
-                    <img src="img/imgInicio.png" alt="imagen tablero">
+                    <img src="/mvc/assets/images/imgInicio.png" alt="imagen tablero">
                     <a href="index.html"><b>Inicio</b></a>
                 </div>
                 <div class="lineaDivisoria"></div>
                 <p>Espacios de Trabajo</p>
                 <div class="itemsSection">
-                    <img src="img/imgMiembros.png" alt="imagen tablero">
+                    <img src="/mvc/assets/images/imgMiembros.png" alt="imagen tablero">
                     <a href="board.html"><b>Board</b></a>
                 </div>
                 <p>Personalizar Plantillas</p>
                 <div class="itemsSection">
-                    <img src="img/imgMiembros.png" alt="imagen tablero">
-                    <a href="formPlantilla.html"><b>Personalizar</b></a>
+                    <img src="/mvc/assets/images/imgMiembros.png" alt="imagen tablero">
+                    <a href="formPlantilla.php"><b>Personalizar</b></a>
                 </div>
             </div>
             <section class="sectionDerecha">
@@ -130,19 +191,19 @@
                             <figcaption>Negocio</figcaption>
                         </figure>
                         <figure>
-                            <img class="Diseño" src="img/iconodiseño.png" alt="imagen Diseño">
+                            <img class="Diseño" src="/mvc/assets/images/iconodiseño.png" alt="imagen Diseño">
                             <figcaption>Diseño</figcaption>
                         </figure>
                         <figure>
-                            <img class="Educacion" src="img/iconoeducacion.png" alt="imagen Educacion">
+                            <img class="Educacion" src="/mvc/assets/images/iconoeducacion.png" alt="imagen Educacion">
                             <figcaption>Educacion</figcaption>
                         </figure>
                         <figure>
-                            <img class="Marketing" src="img/iconomarketing.png" alt="imagen Marketing">
+                            <img class="Marketing" src="/mvc/assets/images/iconomarketing.png" alt="imagen Marketing">
                             <figcaption>Marketing</figcaption>
                         </figure>
                         <figure>
-                            <img class="Remote work" src="img/iconotrabajoremoto.png" alt="imagen Remote work">
+                            <img class="Remote work" src="/mvc/assets/images/iconotrabajoremoto.png" alt="imagen Remote work">
                             <figcaption>Trabajo Remoto</figcaption>
                         </figure>
                     </div>
@@ -152,21 +213,21 @@
                     <div class="contenidoEducacion">
                         <div>
                             <figure>
-                                <img id="LibrosapiladosEducacion" src="img/eduacionlibrosaplidados.jpg" onmouseenter="PlantillaLibros_encendido(this)" onmouseout="PlantillaLibros_apagado(this)" alt="LibrosapiladosEducacion">
+                                <img id="LibrosapiladosEducacion" src="/mvc/assets/images/eduacionlibrosaplidados.jpg" onmouseenter="PlantillaLibros_encendido(this)" onmouseout="PlantillaLibros_apagado(this)" alt="LibrosapiladosEducacion">
                                 <figcaption>PLantilla Libros</figcaption>
                             </figure>
                             <p>Por Kelly Theisen, profesora asistente de química Manténgase organizado en un entorno de aprendizaje</p>    
                         </div>
                         <div>
                             <figure>
-                                <img id="Medicina" src="img/Educacionmedicina.jpg" onmouseenter="PlantillaMedicina_encendido(this)" onmouseout="PlantillaMedicina_apagado(this)" alt="Medicina">
+                                <img id="Medicina" src="/mvc/assets/images/Educacionmedicina.jpg" onmouseenter="PlantillaMedicina_encendido(this)" onmouseout="PlantillaMedicina_apagado(this)" alt="Medicina">
                                 <figcaption>PLantilla Medicina</figcaption>
                             </figure>
                             <p>Por lisiis, profesora asistente de química Manténgase organizado en un entorno de aprendizaje remoto</p>    
                         </div>
                         <div>
                             <figure>
-                                <img id="Plantas" src="img/Educacionplantasflores.webp" onmouseenter="PlantillaPlantas_encendido(this)" onmouseout="PlantillaPlantas_apagado(this)" alt="Plantas">
+                                <img id="Plantas" src="/mvc/assets/images/Educacionplantasflores.webp" onmouseenter="PlantillaPlantas_encendido(this)" onmouseout="PlantillaPlantas_apagado(this)" alt="Plantas">
                                 <figcaption>PLantilla Plantas</figcaption>
                             </figure>
                             <p>Por ass, profesora asistente de química Manténgase organizado en un entorno de aprendizaje remoto</p>    

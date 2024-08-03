@@ -46,8 +46,11 @@ class TareasController {
             $tareas->setEstado($estado);
     
             $tareas->setPrioridad(htmlentities($_POST['prioridad']));
-            $tareas->setTiempoEstimado(htmlentities($_POST['tiempo']));
-    
+            $tiempo_estimado = htmlentities($_POST['tiempo_estimado']);
+
+            // Asignar el valor del tiempo estimado al objeto Tareas
+            $tareas->setTiempoEstimado($tiempo_estimado);
+                
             // Comunicar con el modelo
             $exito = $this->model->insert($tareas);
     

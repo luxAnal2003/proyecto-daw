@@ -70,17 +70,18 @@
             <div class="form-group mb-3">
                 <label for="prioridad">Prioridad</label>
                 <select name="prioridad" id="prioridad" class="form-control" required>
-                    <option value="alta">Alta</option>
-                    <option value="bajo">Bajo</option>
+                    <option value="Baja">Baja</option>
+                    <option value="Media">Media</option>
+                    <option value="Alta">Alta</option>
                 </select>
             </div>
             <div class="form-group mb-3">
                 <label for="tiempo">Tiempo Estimado</label>
-                <input type="text" name="tiempo" id="tiempo" class="form-control" placeholder="Tiempo Estimado" required>
+                <input type="text" name="tiempo_estimado" id="tiempo_estimado" class="form-control" placeholder="Tiempo Estimado" required>
             </div>
             <div class="form-group mb-3">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="estado" name="estado">
+                    <input type="checkbox" class="form-check-input" id="estado" name="estado" value="1">
                     <label for="estado" class="form-check-label">Activo</label>
                 </div>
             </div>
@@ -106,7 +107,7 @@
         let txtNombre = form.nombre.value;
         let txtDescripcion = form.descripcion.value;
         let selectPrioridad = form.prioridad.value;
-        let txtTiempo = form.tiempo.value;
+        let txtTiempo = form.tiempo_estimado.value;
         let chkEstado = form.estado.checked;
 
         let valido = true;
@@ -133,9 +134,9 @@
         }
 
         // Validación del tiempo estimado
-        if (txtTiempo === "" || isNaN(txtTiempo)) {
+        if (txtTiempo === "") {
             valido = false;
-            Mensaje("*Debe ingresar un tiempo estimado en numeros", form.tiempo);
+            Mensaje("*Debe ingresar un tiempo estimado válido (ej: 1 hora, 2 días)", form.tiempo_estimado);
         }
 
         // Validación del checkbox de estado

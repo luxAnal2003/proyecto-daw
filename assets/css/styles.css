@@ -1,0 +1,76 @@
+.barraNavegacion{
+    background: #007bff;
+}
+
+.barraNavegacion ul li a{
+    color: rgba(255,255,255,.7) !important;
+}
+.barraNavegacion ul li a:hover{
+    color: rgba(255,255,255,.9) !important;
+}
+.jumbotron {
+  opacity: 0.8;
+  color: black;
+ margin-top: 30px;
+  margin-bottom: 0px; }
+
+.titNivel1 {
+  color: #007bff;
+  background: #cee6ff;
+  border-radius: 0px; }
+
+.tabladatos tr td{
+    padding: 3px ;
+}
+
+
+/* estilos footer*/
+footer {
+  background-color: #274C77;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.contenedorPrincipal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cajaFooter {
+  width: 25%;
+  float: left;
+  padding: 20px;
+}
+
+.cajaFooter h3 {
+  margin-bottom: 20px;
+}
+
+.cajaFooter ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cajaFooter ul li {
+  margin-bottom: 10px;
+}
+
+.cajaFooter ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.cajaFooter ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Clearfix for floating elements */
+.contenedorPrincipal::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+

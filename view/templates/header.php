@@ -45,8 +45,12 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
                 ?>
             </ul>  
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item my-auto"><span style="color:white">Usuario </span></li>
-                <li class="nav-item"><a class="nav-link" href="index.php?c=index&f=index&p=login">Login</a></li>
+                <?php if (!empty($_SESSION['usuario_nombre'])) { ?>
+                    <li class="nav-item my-auto"><span style="color:white">Bienvenido, <?php echo $_SESSION['usuario_nombre']; ?></span></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php?c=index&f=index&p=logout">Cerrar sesión</a></li>
+                <?php } else { ?>
+                    <li class="nav-item"><a class="nav-link" href="index.php?c=index&f=index&p=login">Login</a></li>
+                <?php } ?>
             </ul>
         </nav>
         <h1 class="jumbotron text-center titNivel1">

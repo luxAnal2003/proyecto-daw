@@ -13,6 +13,11 @@
         
         require_once 'controller/' . $controlador . '.php';
      
+        if (isset($_GET['p']) && $_GET['p'] == 'logout') {
+            $indexController = new IndexController();
+            $indexController->logout();
+        }
+        
         $cont = new  $controlador();// creacion del objeto controlador 
         $cont->$funcion();// llamada a la funcion del controlador
 

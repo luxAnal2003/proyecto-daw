@@ -1,16 +1,6 @@
 <!-- incluimos  Encabezado -->
 <?php require_once HEADER; ?>
-
 <style>
-    .btn-gris {
-        background-color: #6c757d;
-        border-color: #6c757d;
-        color: white;
-    }
-    .btn-gris:hover {
-        background-color: #5a6268;
-        border-color: #545b62;
-    }
     .container {
         max-width: 800px; 
         margin: 0 auto;
@@ -32,8 +22,25 @@
     .mensajeError{
         color:rgb(255, 0, 0);
         font-size: 9px;
-        }
+    }
 
+    .btn-primary {
+        background-color: #274C77;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #6096BA;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
 </style>
 
 
@@ -71,8 +78,8 @@
             </div>
 
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-gris" onclick="if (!confirm('¿Está seguro de modificar la tarea?')) return false;">Guardar</button>
-                <a href="index.php?c=tareas&f=index" class="btn btn-gris">Cancelar</a>
+                <button type="submit" class="btn btn-primary" onclick="if (!confirm('¿Está seguro de modificar la tarea?')) return false;">Guardar</button>
+                <a href="index.php?c=tareas&f=index" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>
     </div>

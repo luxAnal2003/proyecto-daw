@@ -1,22 +1,57 @@
 <!--autor: Sanchez Albarracin Luccy-->
 <?php require_once HEADER; ?>
+<style>
+    .container {
+        font-family: 'Arial', sans-serif;
+    }
 
-<div class="container">
-    <h2><?php echo $titulo; ?></h2>
-    <?php if (isset($_SESSION['mensaje'])) { ?>
-        <div class="alert alert-<?php echo $_SESSION['color']; ?>">
-            <?php echo $_SESSION['mensaje']; ?>
-            <?php unset($_SESSION['mensaje']); ?>
+    .btn-secondary {
+        background-color: #274C77;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #6096BA;
+    }
+
+    .centro{
+        text-align: center;
+    }
+
+    h2 {
+        color: #343a40;
+    }
+
+    .table-dark th {
+        background-color: #274C77;
+        color: white;
+    }
+</style>
+<div class="container mt-4">
+    <h2 class="mb-4"><?php echo $titulo; ?></h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="index.php?c=Proyectos&f=search" method="POST" class="input-group">
+                <input type="text" name="b" id="busqueda" placeholder="Buscar..." class="form-control"/>
+                <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i> Buscar</button>
+            </form>     
         </div>
-    <?php } ?>
-    <a href="index.php?c=Proyectos&f=view_new" class="btn btn-primary">Nuevo Proyecto</a>
+        <div class="col-sm-6 text-end">
+            <a href="index.php?c=Proyectos&f=view_new"> 
+                <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> 
+                        Nuevo Proyecto
+                </button>
+            </a>
+        </div>
+    </div>
     <table class="table mt-4">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Gestor</th>
-                <th>Acciones</th>
+                <th class="centro">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +60,7 @@
                     <td><?= $proyecto->nombre ?></td>
                     <td><?= $proyecto->descripcion ?></td>
                     <td><?= $proyecto->usuario_creacion ?></td>
-                    <td>
+                    <td class="centro">
                         <a class="btn btn-warning btn-sm me-2" 
                            href="index.php?c=Proyectos&f=view_edit&id=<?= $proyecto->id ?>">
                             <i class="fas fa-edit"></i> Editar

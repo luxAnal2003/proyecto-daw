@@ -31,6 +31,15 @@
         color: #495057;
     }
 
+    .btn-primary {
+        background-color: #274C77;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #6096BA;
+    }
+
     .btn-secondary {
         background-color: #6c757d;
         border: none;
@@ -95,7 +104,7 @@
                 </div>
             </div>
             <div class="form-group text-center mt-4">
-                <button type="submit" class="btn btn-secondary me-2">Guardar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
                 <a href="index.php?c=tareas&f=index" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>

@@ -17,6 +17,13 @@ class ProyectosController {
         require_once VPROYECTOS.'list.php';
     }
 
+    public function search(){
+        $parametro = (!empty($_POST["b"])) ? htmlentities($_POST["b"]) : "";
+        $resultados = $this->model->selectAll($parametro);
+        $titulo = "Buscar Proyectos";
+        require_once VPROYECTOS.'list.php';
+    }
+
     // Muestra el formulario para crear un nuevo proyecto
     public function view_new() {
         $titulo = "Nuevo Proyecto";

@@ -5,14 +5,6 @@
         font-family: 'Arial', sans-serif;
     }
 
-    .centro{
-        text-align: center;
-    }
-
-    h2 {
-        color: #343a40;
-    }
-
     .btn-secondary {
         background-color: #274C77;
         border: none;
@@ -21,31 +13,13 @@
     .btn-secondary:hover {
         background-color: #6096BA;
     }
-
-    .btn-warning {
-        background-color: #ffc107;
-        border: none;
+    
+    .centro{
+        text-align: center;
     }
 
-    .btn-warning:hover {
-        background-color: #e0a800;
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border: none;
-    }
-
-    .btn-danger:hover {
-        background-color: #c82333;
-    }
-
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f8f9fa;
-    }
-
-    .table-hover tbody tr:hover {
-        background-color: #e9ecef;
+    h2 {
+        color: #343a40;
     }
 
     .table-dark th {
@@ -73,7 +47,7 @@
         </div>
     </div>
     <div class="table-responsive mt-2">
-        <table class="table table-striped table-hover">
+        <table class="table mt-4">
             <thead class="table-dark">
                 <tr>
                     <th>Tarea</th>
@@ -84,7 +58,7 @@
                     <th class="centro">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="tabladatos">
+            <tbody>
                 <?php foreach ($resultados as $fila) { ?>
                 <tr>
                     <td><?php echo htmlspecialchars($fila->tarea_nombre); ?></td>

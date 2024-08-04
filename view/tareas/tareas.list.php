@@ -41,14 +41,6 @@
         background-color: #c82333;
     }
 
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f8f9fa;
-    }
-
-    .table-hover tbody tr:hover {
-        background-color: #e9ecef;
-    }
-
     .table-dark th {
         background-color: #274C77;
         color: white;
@@ -73,19 +65,18 @@
             </a>
         </div>
     </div>
-    <div class="table-responsive mt-2">
-        <table class="table table-striped table-hover">
+        <table class="table mt-4">
             <thead class="table-dark">
                 <tr>
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Estado</th>
                     <th>Prioridad</th>
-                    <th>Tiempo Estimado</th>
-                    <th>Acciones</th>
+                    <th>Tiempo</th>
+                    <th class="centro">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="tabladatos">
+            <tbody>
                 <?php foreach ($resultados as $fila) { ?>
                 <tr>
                     <td><?php echo $fila['nombre']; ?></td>
@@ -93,7 +84,7 @@
                     <td><?php echo $fila['estado']; ?></td>
                     <td><?php echo $fila['prioridad']; ?></td>
                     <td><?php echo $fila['tiempo_estimado']; ?></td>
-                    <td>
+                    <td class="centro">
                         <a class="btn btn-warning btn-sm me-2" href="index.php?c=tareas&f=view_edit&id=<?php echo $fila['id']; ?>">
                             <i class="fas fa-edit"></i>Editar
                         </a>
@@ -105,7 +96,6 @@
                 <?php } ?>
             </tbody>
         </table>
-    </div>
 </div>
 
 <?php require_once FOOTER; ?>

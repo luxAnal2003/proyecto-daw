@@ -1,6 +1,24 @@
 <!--autor: Sanchez Albarracin Luccy-->
 <?php require_once HEADER; ?>
+<style>
+    .btn-primary {
+        background-color: #274C77;
+        border: none;
+    }
 
+    .btn-primary:hover {
+        background-color: #6096BA;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+</style>
 <div class="container">
     <h2><?php echo $titulo; ?></h2>
     <div class="card card-body">
@@ -46,7 +64,7 @@
                 </div>
                 <div class="form-group mx-auto">
                     <button type="submit" class="btn btn-primary" onclick="if (!confirm('¿Está seguro de modificar la asignación?')) return false;">Guardar</button>
-                    <a href="index.php?c=asignaciones&f=index" class="btn btn-primary">Cancelar</a>
+                    <a href="index.php?c=asignaciones&f=index" class="btn btn-secondary">Cancelar</a>
                 </div>
             </div>
         </form>

@@ -105,8 +105,19 @@ class TareasDAO {
             throw $e;
         }
     }
-    
 
+    public function updateEstado($id, $estado) {
+        try {
+            $sql = "UPDATE tareas SET estado = :estado WHERE id = :id";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
     public function delete($id) {
         // Eliminar asignaciones asociadas con la tarea
         $sql = "DELETE FROM asignaciones WHERE tarea_id = :id";

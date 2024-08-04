@@ -21,7 +21,27 @@ class TareasController {
         $resultados = $this->model->selectAllHome();
         return $resultados;
     }
+
+    public function updateEstado() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'];
+            $estadoCheckbox = isset($_POST['estadoCheckbox']) ? 1 : 0; // Si el checkbox está marcado, el estado es 1, si no, es 0
     
+            // Solo actualizar el estado de la tarea
+            $exito = $this->model->updateEstado($id, $estadoCheckbox);
+    
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            $_SESSION['mensaje'] = $exito ? 'Estado de la tarea actualizado exitosamente' : 'No se pudo actualizar el estado de la tarea';
+            $_SESSION['color'] = $exito ? 'primary' : 'danger';
+    
+            header('Location: index.php?c=Index&f=index');
+        }
+    }
+    
+    
+
     public function search(){
         $parametro = (!empty($_POST["b"])) ? htmlentities($_POST["b"]) : "";
         $resultados = $this->model->selectAll($parametro);

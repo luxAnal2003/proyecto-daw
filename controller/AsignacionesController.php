@@ -24,6 +24,15 @@ class AsignacionesController {
       require_once VASIGNACIONES.'list.php';
     }
 
+    public function tareasPorUsuario(){
+        $resultados = $this->model->selectTask("");
+        return $resultados;
+    }
+
+    public function actualizarEstado($id, $estado) {
+        $this->model->actualizarEstado($id, $estado);
+    }
+    
     public function search() {
         // Leer el parámetro de búsqueda enviado por el formulario
         $parametro = (!empty($_POST["b"])) ? htmlentities($_POST["b"]) : "";

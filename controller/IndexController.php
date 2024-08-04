@@ -14,17 +14,21 @@ class IndexController {
         }else{
             // Verificar si el usuario está logueado y es un gestor (rol_id = 2)
             if(isset($_SESSION['usuario_rol'])){
-                if($_SESSION['usuario_rol'] == 2){
+                if ($_SESSION['usuario_rol'] == 2){
                     // flujo de ventanas
                     $proyectosController = new ProyectosController();
                     $resultados = $proyectosController->home();
 
                     $tareasController = new TareasController();
                     $tareas = $tareasController->home();
-                    require_once 'view/homeViewGestor.php'; //mostrando la vista de home de la aplicacion
+                    require_once 'view/homeViewGestor.php';
+                } else if($_SESSION['usuario_rol'] == 1){//si es admin
+                    require_once 'view/homeViewAdministrador.php';
+                }else {//si es empleado
+                    require_once 'view/homeViewEmpleado.php';
                 }
             } else {
-                // Si no es un gestor
+                // Si no esta logueado
                 require_once 'view/homeView.php'; 
             }
         }

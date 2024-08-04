@@ -1,5 +1,21 @@
 <!--autor: Sanchez Albarracin Luccy-->
-<?php require_once HEADER; ?>
+<?php require_once HEADER; 
+    // Verificar si el usuario tiene permiso para ver esta página
+    if (isset($_SESSION['usuario_id'])) {
+        if ($_SESSION['usuario_rol'] != 2) {
+            $_SESSION['mensaje'] = 'No tienes permiso para acceder a esta página.';
+            $_SESSION['color'] = 'danger';
+            header("Location: index.php?c=Index&f=index");
+            exit();
+        }
+    } else {
+        // Redirigir a la página de inicio si no hay usuario en sesión
+        $_SESSION['mensaje'] = 'Debes iniciar sesión para acceder a esta página.';
+        $_SESSION['color'] = 'danger';
+        header("Location: index.php?c=Index&f=index");
+        exit();
+    }
+?>
 <style>
     .container {
         font-family: 'Arial', sans-serif;

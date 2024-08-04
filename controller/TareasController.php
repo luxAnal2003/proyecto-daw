@@ -2,6 +2,7 @@
 
 require_once 'model/dao/TareasDAO.php';
 require_once 'model/dto/Tareas.php';
+require_once 'model/dao/ProyectosDAO.php';
 
 class TareasController {
     private $model;
@@ -25,14 +26,20 @@ class TareasController {
 
     public function view_new(){
         $titulo = "Nueva Tarea";
+        $proyectosDAO = new ProyectosDAO(); 
+        $proyectos = $proyectosDAO->selectAll();
         require_once VTAREAS.'nuevo.php';
     }
 
     public function new() {
+        // Obtener proyectos
+        $proyectosDAO = new ProyectosDAO();
+        $proyectos = $proyectosDAO->selectAll();
+
         // Cuando la solicitud es por POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Considerar verificaciones
-            if (empty($_POST['nombre'])) { 
+            if (empty($_POST['nombre']) || empty($_POST['proyecto_id'])) { 
                 header('Location: index.php?c=tareas&f=index');
             }
             
@@ -40,6 +47,7 @@ class TareasController {
             
             // Lectura de parámetros
             $tareas->setNombre(htmlentities($_POST['nombre']));
+            $tareas->setProyectoId(htmlentities($_POST['proyecto_id']));
             $tareas->setDescripcion(htmlentities($_POST['descripcion']));
             
             $estado = (isset($_POST['estado'])) ? 1 : 0; // Ejemplo de dato no obligatorio
@@ -72,55 +80,51 @@ class TareasController {
     }
     
     public function delete() {
-        // Leer parámetros
-        $tareas = new Tareas();
         $id = htmlentities($_REQUEST['id']);
-        $tareas->setId($id);
     
-        // Comunicando con el modelo
-        $exito = $this->model->delete($tareas);
+        // comunicando con el modelo
+        $exito = $this->model->delete($id);
         $msj = 'Tarea eliminada exitosamente';
         $color = 'primary';
         if (!$exito) {
             $msj = "No se pudo eliminar la tarea";
             $color = "danger";
         }
-        if (!isset($_SESSION)) { session_start(); };
+        if (!isset($_SESSION)) {
+            session_start();
+        };
         $_SESSION['mensaje'] = $msj;
         $_SESSION['color'] = $color;
-        // Llamar a la vista
+        // llamar a la vista
         header('Location: index.php?c=tareas&f=index');
     }
 
      // muestra el formulario de editar producto
     public function view_edit(){
-        //leer parametro
-        $id= $_GET['id']; // verificar, limpiar
-        //comunicarse con el modelo de productos
+        $id= $_GET['id']; 
         $tareas = $this->model->selectOne($id);
-    
-        // comunicarse con la vista
+        $data['tareas'] = $tareas; 
         $titulo="Editar Tarea";
         require_once VTAREAS.'edit.php';
     }
-  
+
     public function edit(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Leer parámetros
-            $tareas = new tareas();
+            $tareas = new Tareas();
             $tareas->setId(htmlentities($_POST['id']));
             $tareas->setNombre(htmlentities($_POST['nombre']));
             $tareas->setDescripcion(htmlentities($_POST['descripcion']));
-            
-            $estado = (isset($_POST['estado'])) ? 1 : 0; 
+    
+            $estado = (isset($_POST['estado'])) ? 1 : 0;
             $tareas->setEstado($estado);
     
             $tareas->setPrioridad(htmlentities($_POST['prioridad']));
-            $tareas->setEstimado(htmlentities($_POST['estimado']));
+            $tareas->setTiempoEstimado(htmlentities($_POST['estimado']));
     
             // Llamar al modelo
             $exito = $this->model->update($tareas);
-            
+    
             $msj = 'Tarea actualizada exitosamente';
             $color = 'primary';
             if (!$exito) {
@@ -133,7 +137,8 @@ class TareasController {
     
             // Redirigir a la vista
             header('Location:index.php?c=tareas&f=index');
-        } 
+        }
     }
+    
 }
   

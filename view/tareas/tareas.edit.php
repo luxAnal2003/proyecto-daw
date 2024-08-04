@@ -41,30 +41,32 @@
     <h2><?php echo $titulo ?></h2>
     <div class="card cuerpo">
         <form action="index.php?c=tareas&f=edit" method="POST" name="formProdNuevo" id="formProdNuevo">
-            <input type="hidden" name="id" id="id" value="<?php echo $tareas['tareas_id']; ?>"/>
+            <input type="hidden" name="id" id="id" value="<?php echo $tareas['id']; ?>"/>
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" value="<?php echo $tareas['tareas_nombre']; ?>" class="form-control" placeholder="Nombre de la tarea" required>
+                <input type="text" name="nombre" id="nombre" value="<?php echo $tareas['nombre']; ?>" class="form-control" placeholder="Nombre de la tarea" required>
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <input type="text" name="descripcion" id="descripcion" value="<?php echo $tareas['tareas_descripcion']; ?>" class="form-control" placeholder="Descripción de la tarea" required>
+                <input type="text" name="descripcion" id="descripcion" value="<?php echo $tareas['descripcion']; ?>" class="form-control" placeholder="Descripción de la tarea" required>
             </div>
             
             <div class="form-group">
                 <label for="prioridad">Prioridad</label>
                 <select name="prioridad" id="prioridad" class="form-control" required>
-                    <option value="alta" <?php echo ($tareas['tareas_prioridad'] == 'alta') ? 'selected' : ''; ?>>Alta</option>
-                    <option value="bajo" <?php echo ($tareas['tareas_prioridad'] == 'bajo') ? 'selected' : ''; ?>>Bajo</option>
+                    <option value="alta" <?php echo ($tareas['prioridad'] == 'alta') ? 'selected' : ''; ?>>Alta</option>
+                    <option value="media" <?php echo ($tareas['prioridad'] == 'media') ? 'selected' : ''; ?>>Media</option>
+                    <option value="baja" <?php echo ($tareas['prioridad'] == 'baja') ? 'selected' : ''; ?>>Baja</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="estimado">Tiempo estimado</label>
                 <input type="text" name="estimado" id="estimado" value="<?php echo $tareas['tiempo_estimado']; ?>" class="form-control" placeholder="Tiempo estimado" required>
             </div>
 
             <div class="form-group form-check">
-                <input type="checkbox" id="estado" name="estado" value="1" class="form-check-input" <?php echo ($tareas['tareas_estado'] == 1) ? 'checked' : ''; ?>>
+                <input type="checkbox" id="estado" name="estado" value="1" class="form-check-input" <?php echo ($tareas['estado'] == 1) ? 'checked' : ''; ?>>
                 <label for="estado" class="form-check-label">Activo</label>
             </div>
 
@@ -115,9 +117,9 @@
         }
 
         // Validación del tiempo estimado
-        if (txtTiempo === "" || isNaN(txtTiempo)) {
+        if (txtTiempo === "") {
             valido = false;
-            Mensaje("*Debe ingresar un tiempo estimado en numeros", form.estimado);
+            Mensaje("*Debe ingresar un tiempo estimado válido (ej: 1 hora, 2 días)", form.estimado);
         }
 
         // Validación del checkbox de estado

@@ -86,7 +86,7 @@ class AsignacionesController {
             $asignacion->setUsuarioId(htmlentities($_POST['usuario']));
             $asignacion->setProyectoId(htmlentities($_POST['proyecto']));
             $asignacion->setGestorId($_SESSION['usuario_id']); // Asegúrate de que el ID del gestor esté en la sesión
-            $estado = (isset($_POST['estado'])) ? htmlentities($_POST['estado']) : 'pendiente';
+            $estado = (isset($_POST['estado'])) ? htmlentities($_POST['estado']) : 1;
             $asignacion->setEstado($estado);
             $fechaActual = new DateTime('NOW');
             $asignacion->setFechaAsignacion($fechaActual->format('Y-m-d H:i:s'));

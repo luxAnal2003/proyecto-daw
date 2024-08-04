@@ -59,6 +59,15 @@
     <h2 class="mb-4 text-center"><?php echo $titulo; ?></h2>
     <div class="card card-body">
         <form action="index.php?c=tareas&f=new" method="POST" name="formTareaNuevo" id="formTareaNuevo">
+            <div class="form-group">
+                <label for="proyecto">Proyecto</label>
+                <select class="form-control" id="proyecto" name="proyecto_id">
+                    <option value="">Seleccione un proyecto</option>
+                    <?php foreach ($proyectos as $proyecto) { ?>
+                        <option value="<?php echo $proyecto->id; ?>"><?php echo $proyecto->nombre; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
             <div class="form-group mb-3">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la tarea" required>

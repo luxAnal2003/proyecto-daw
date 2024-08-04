@@ -17,7 +17,7 @@ define("VTAREAS", "view/tareas/tareas.");
 define("VCATEGORIAS", "view/categorias/categorias.");
 
 
-// ruta de vistas modulo categorias
+// ruta de vistas modulo asignaciones
 define("VASIGNACIONES", "view/asignaciones/asignaciones.");
 
 // conexion bb

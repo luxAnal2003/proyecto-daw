@@ -35,7 +35,7 @@ class TareasDAO {
 
     public function selectOne($id) {
         $sql = "select * from tareas where ".
-        "tareas_id =:id";
+        "id =:id";
         // preparar la sentencia
         $stmt = $this->con->prepare($sql);
         $data = ['id' => $id];
@@ -54,41 +54,44 @@ class TareasDAO {
             $sql = "INSERT INTO tareas (nombre, descripcion, tiempo_estimado, prioridad, fecha_creacion, proyecto_id, estado) 
                     VALUES (:nombre, :descripcion, :tiempo_estimado, :prioridad, CURRENT_TIMESTAMP, :proyecto_id, :estado)";
             $stmt = $this->con->prepare($sql);
-            $data = [
+            $data = array(
                 'nombre' => $tarea->getNombre(),
                 'descripcion' => $tarea->getDescripcion(),
                 'tiempo_estimado' => $tarea->getTiempoEstimado(),
                 'prioridad' => $tarea->getPrioridad(),
                 'proyecto_id' => $tarea->getProyectoId(),
                 'estado' => $tarea->getEstado()
-            ];
+            );
             $stmt->execute($data);
             
             $this->con->commit();
-            return true;
+            if ($stmt->rowCount() <= 0) {
+                echo "Error al insertar tarea: " . $stmt->errorInfo()[2];
+                return false;
+            }
         } catch (Exception $e) {
-            $this->con->rollBack();
-            throw $e;
+            echo $e->getMessage();
+            return false;
         }
+        return true;
     }
 
     public function update(Tareas $tarea) {
         try {
             $this->con->beginTransaction();
-
-            $sql = "UPDATE tareas SET nombre=:nombre, descripcion=:descripcion, tiempo_estimado=:tiempo_estimado, prioridad=:prioridad, proyecto_id=:proyecto_id, estado=:estado WHERE id=:id";
+    
+            $sql = "UPDATE tareas SET nombre=:nombre, descripcion=:descripcion, tiempo_estimado=:tiempo_estimado, prioridad=:prioridad, estado=:estado WHERE id=:id";
             $stmt = $this->con->prepare($sql);
             $data = [
                 'nombre' => $tarea->getNombre(),
                 'descripcion' => $tarea->getDescripcion(),
                 'tiempo_estimado' => $tarea->getTiempoEstimado(),
                 'prioridad' => $tarea->getPrioridad(),
-                'proyecto_id' => $tarea->getProyectoId(),
                 'estado' => $tarea->getEstado(),
                 'id' => $tarea->getId()
             ];
             $stmt->execute($data);
-            
+    
             $this->con->commit();
             return true;
         } catch (Exception $e) {
@@ -96,29 +99,21 @@ class TareasDAO {
             throw $e;
         }
     }
+    
 
     public function delete($id) {
-        try {
-            // Prepare
-            $sql = "DELETE FROM tareas WHERE id=:id";
-            
-            // Bind parameters
-            $sentencia = $this->con->prepare($sql);
-            $data = array('id' => $tareas->getId());
+        // Eliminar asignaciones asociadas con la tarea
+        $sql = "DELETE FROM asignaciones WHERE tarea_id = :id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     
-            // Execute
-            $sentencia->execute($data);
-            
-            // Retornar resultados
-            if ($sentencia->rowCount() <= 0) { // Verificar si se eliminó
-                return false;
-            }
-        } catch(Exception $e) {
-            echo $e->getMessage();
-            return false;
-        }
-        
-        return true;
+        // Eliminar la tarea
+        $sql = "DELETE FROM tareas WHERE id = :id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
+    
 }
 ?>

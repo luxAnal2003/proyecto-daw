@@ -79,33 +79,33 @@ INSERT INTO Usuarios (nombre, email, contrasena, rol_id) VALUES
 
 -- Proyectos creados por Gestor1
 INSERT INTO Proyectos (nombre, descripcion, usuario_creacion) VALUES 
-('Desarrollo de una aplicación web', 'Se desarrollará una aplicación web para la gestión de tareas y proyectos.', 2),
-('Desarollo de un programa contable', 'Se desarrollará un programa para gestionar contabilidad de pequeñas y medianas empresas.', 2);
+('Desarrollo de una aplicacion web', 'Se desarrollara una aplicación web para la gestión de tareas y proyectos.', 2),
+('Desarollo de un programa contable', 'Se desarrollara un programa para gestionar contabilidad de pequeñas y medianas empresas.', 2);
 
 -- Proyectos creados por Gestor2
 INSERT INTO Proyectos (nombre, descripcion, usuario_creacion) VALUES 
 ('Desarrollo de un programa de compra y venta de boletos de cine', 'Se desea aplicar un sistema para la compra y venta de boletos en cines para automatizacion en compras.', 3),
-('Reingenieria aplicada al sistema del area contable', 'Se realizará una reingeniería del sistema de facturación existente.', 3);
+('Reingenieria aplicada al sistema del area contable', 'Se realizara una reingeniería del sistema de facturación existente.', 3);
 
 -- Tareas del Proyecto1
 INSERT INTO Tareas (nombre, descripcion, tiempo_estimado, prioridad, proyecto_id, estado) VALUES 
-('Diseño de la interfaz', 'Diseño de la interfaz de usuario para la aplicación web.', '2 días', 'Media', 1, 1),
+('Diseno de la interfaz', 'Diseño de la interfaz de usuario para la aplicación web.', '2 días', 'Media', 1, 1),
 ('Desarrollo del backend', 'Desarrollo del backend de la aplicación web.', '5 días', 'Alta', 1, 1);
 
 -- Tareas del Proyecto2
 INSERT INTO Tareas (nombre, descripcion, tiempo_estimado, prioridad, proyecto_id, estado) VALUES 
-('Modelado de la base de datos', 'Creación del modelo de base de datos para el programa contable.', '3 días', 'Alta', 2, 1),
-('Implementación de la lógica contable', 'Desarrollo de la lógica contable en el programa.', '4 días', 'Media', 2, 1);
+('Modelado de la base de datos', 'Creacion del modelo de base de datos para el programa contable.', '3 días', 'Alta', 2, 1),
+('Implementacion de la logica contable', 'Desarrollo de la logica contable en el programa.', '4 días', 'Media', 2, 1);
 
 -- Tareas del Proyecto3
 INSERT INTO Tareas (nombre, descripcion, tiempo_estimado, prioridad, proyecto_id, estado) VALUES 
-('Desarrollo del módulo de compra', 'Desarrollo del módulo para la compra de boletos.', '6 días', 'Alta', 3, 1),
-('Desarrollo del módulo de venta', 'Desarrollo del módulo para la venta de boletos.', '4 días', 'Media', 3, 1);
+('Desarrollo del modulo de compra', 'Desarrollo del modulo para la compra de boletos.', '6 días', 'Alta', 3, 1),
+('Desarrollo del modulo de venta', 'Desarrollo del modulo para la venta de boletos.', '4 días', 'Media', 3, 1);
 
 -- Tareas del Proyecto4
 INSERT INTO Tareas (nombre, descripcion, tiempo_estimado, prioridad, proyecto_id, estado) VALUES 
-('Análisis del sistema actual', 'Análisis del sistema de facturación actual.', '2 días', 'Baja', 4, 1),
-('Diseño de mejoras', 'Diseño de mejoras para el sistema de facturación.', '3 días', 'Media', 4, 1);
+('Analisis del sistema actual', 'Analisis del sistema de facturacion actual.', '2 días', 'Baja', 4, 1),
+('Diseno de mejoras', 'Diseno de mejoras para el sistema de facturacion.', '3 días', 'Media', 4, 1);
 
 INSERT INTO Asignaciones (tarea_id, usuario_id, gestor_id, proyecto_id) VALUES 
 (1, 4, 2, 1),

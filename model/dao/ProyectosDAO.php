@@ -24,11 +24,16 @@ class ProyectosDAO {
 
     // Selecciona un proyecto específico por su ID
     public function selectOne($id) {
-        $sql = "SELECT id, nombre FROM proyectos WHERE id = :id";
+        $sql = "SELECT nombre FROM proyectos WHERE id = :id";
         $stmt = $this->con->prepare($sql);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return $resultado;
+        } else {
+            return array('nombre' => '');
+        }
     }
 
     // Inserta un nuevo proyecto

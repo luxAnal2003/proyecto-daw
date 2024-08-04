@@ -4,6 +4,7 @@ require_once 'TareasController.php';
 class IndexController {  
 
     public function index(){
+        session_start();
         if(!empty($_GET['p'])){
             $page =  $_GET['p']; // limpiar datos
             // flujo de ventanas
@@ -11,14 +12,21 @@ class IndexController {
             require_once 'view/estaticas/'.$page.'.php';
             require_once FOOTER;
         }else{
-              // flujo de ventanas
-              $proyectosController = new ProyectosController();
-              $resultados = $proyectosController->home();
+            // Verificar si el usuario está logueado y es un gestor (rol_id = 2)
+            if(isset($_SESSION['usuario_rol'])){
+                if($_SESSION['usuario_rol'] == 2){
+                    // flujo de ventanas
+                    $proyectosController = new ProyectosController();
+                    $resultados = $proyectosController->home();
 
-              $tareasController = new TareasController();
-              $tareas = $tareasController->home();
-              require_once 'view/homeViewGestor.php'; //mostrando la vista de home de la aplicacion
-         
+                    $tareasController = new TareasController();
+                    $tareas = $tareasController->home();
+                    require_once 'view/homeViewGestor.php'; //mostrando la vista de home de la aplicacion
+                }
+            } else {
+                // Si no es un gestor
+                require_once 'view/homeView.php'; 
+            }
         }
     }
     

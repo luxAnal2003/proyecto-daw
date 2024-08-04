@@ -58,7 +58,7 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
         </nav>
         <h1 class="jumbotron text-center titNivel1">
             <i class="fab fa-shopify"></i>
-            Gestor de Proyectos </h1>
+            Gestor de Proyectos y Tareas</h1>
 
         <?php
        

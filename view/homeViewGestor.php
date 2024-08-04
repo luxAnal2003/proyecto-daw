@@ -5,9 +5,10 @@
         margin-bottom: 30px;
     }
     
-    h3 {
+    .titulo {
         color: #274C77;
     }
+
     .proyecto-tarjeta, .plantillaDeshabilitada {
         background-color: #E7ECEF;
         width: 300px;
@@ -61,7 +62,7 @@
     <div>
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="mb-4">Proyectos disponibles</h3>
+                <h3 class="mb-4 titulo">Proyectos disponibles</h3>
             </div>
             <div class="col-sm-6 d-flex justify-content-end">
                 <a href="index.php?c=Proyectos&f=view_new"> 
@@ -84,7 +85,7 @@
     <div>
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="mb-4">Tareas creadas</h3>
+                <h3 class="mb-4 titulo">Tareas creadas</h3>
             </div>
             <div class="col-sm-6 d-flex justify-content-end">
                 <a href="index.php?c=Tareas&f=view_new"> 

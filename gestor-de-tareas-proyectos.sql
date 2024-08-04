@@ -2,7 +2,6 @@
 CREATE DATABASE IF NOT EXISTS gestorTareasProyectos;
 USE gestorTareasProyectos;
 
-
 CREATE TABLE IF NOT EXISTS Roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE
@@ -26,8 +25,8 @@ CREATE TABLE IF NOT EXISTS Proyectos (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     usuario_creacion INT,
-    estado int(1) NOT NULL DEFAULT 1,
-    FOREIGN KEY (usuario_creacion) REFERENCES Usuarios(id)
+    estado INT(1) NOT NULL DEFAULT 1,
+    FOREIGN KEY (usuario_creacion) REFERENCES Usuarios(id) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS Tareas (
@@ -38,8 +37,8 @@ CREATE TABLE IF NOT EXISTS Tareas (
     prioridad ENUM('Baja', 'Media', 'Alta'),
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     proyecto_id INT,
-    estado int(1) NOT NULL DEFAULT 1,
-    FOREIGN KEY (proyecto_id) REFERENCES Proyectos(id)
+    estado INT(1) NOT NULL DEFAULT 1,
+    FOREIGN KEY (proyecto_id) REFERENCES Proyectos(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Asignaciones (
@@ -49,13 +48,12 @@ CREATE TABLE IF NOT EXISTS Asignaciones (
     gestor_id INT, 
     proyecto_id INT,
     fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado int(1) NOT NULL DEFAULT 1,
-    FOREIGN KEY (tarea_id) REFERENCES Tareas(id),
-    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id),
-    FOREIGN KEY (gestor_id) REFERENCES Usuarios(id), 
-    FOREIGN KEY (proyecto_id) REFERENCES Proyectos(id) 
+    estado INT(1) NOT NULL DEFAULT 1,
+    FOREIGN KEY (tarea_id) REFERENCES Tareas(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id) ON DELETE SET NULL,
+    FOREIGN KEY (gestor_id) REFERENCES Usuarios(id) ON DELETE SET NULL, 
+    FOREIGN KEY (proyecto_id) REFERENCES Proyectos(id) ON DELETE CASCADE
 );
-
 
 
 INSERT INTO Roles (nombre) VALUES 

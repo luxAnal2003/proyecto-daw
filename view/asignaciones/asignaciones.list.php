@@ -1,4 +1,4 @@
-<!-- autor: Luccy Sanchez Albarracin -->
+<!--autor: Sanchez Albarracin Luccy-->
 <?php require_once HEADER; ?>
 <style>
     .container {

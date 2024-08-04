@@ -1,4 +1,5 @@
 <?php
+//autor: Sanchez Albarracin Luccy
 
 class Proyecto {
     private $id;

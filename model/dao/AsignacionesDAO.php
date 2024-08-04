@@ -1,4 +1,5 @@
 <?php
+//autor: Sanchez Albarracin Luccy
 require_once 'config/Conexion.php';
 date_default_timezone_set('America/Guayaquil');
 

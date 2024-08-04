@@ -1,4 +1,9 @@
 <!-- parte final del documento-->
+<style>
+    h3 {
+        color: #fff;
+    }
+</style>
 <footer class="footer">
     <div class="row">
         <div class="col-sm-4 d-flex flex-column">

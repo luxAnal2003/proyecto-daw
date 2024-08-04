@@ -1,4 +1,6 @@
 <?php
+require_once 'ProyectosController.php';
+require_once 'TareasController.php';
 class IndexController {  
 
     public function index(){
@@ -10,7 +12,12 @@ class IndexController {
             require_once FOOTER;
         }else{
               // flujo de ventanas
-          require_once 'view/homeView.php'; //mostrando la vista de home de la aplicacion
+              $proyectosController = new ProyectosController();
+              $resultados = $proyectosController->home();
+
+              $tareasController = new TareasController();
+              $tareas = $tareasController->home();
+              require_once 'view/homeViewGestor.php'; //mostrando la vista de home de la aplicacion
          
         }
     }

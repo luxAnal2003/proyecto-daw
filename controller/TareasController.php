@@ -17,6 +17,11 @@ class TareasController {
         require_once VTAREAS.'list.php';  
     }
 
+    public function home(){
+        $resultados = $this->model->selectAllHome();
+        return $resultados;
+    }
+    
     public function search(){
         $parametro = (!empty($_POST["b"])) ? htmlentities($_POST["b"]) : "";
         $resultados = $this->model->selectAll($parametro);

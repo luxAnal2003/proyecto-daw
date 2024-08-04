@@ -25,8 +25,14 @@ class ProyectosDAO {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // Selecciona un proyecto específico por su ID
+    public function selectAllHome(){
+        $sql = "SELECT * FROM proyectos";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
     
+    // Selecciona un proyecto específico por su ID
     public function selectOne($id) {
         $sql = "SELECT id, nombre, descripcion FROM proyectos WHERE id = :id";
         $stmt = $this->con->prepare($sql);
@@ -35,7 +41,6 @@ class ProyectosDAO {
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
     
-
     // Inserta un nuevo proyecto
     public function insert($proyecto) {
         session_start();

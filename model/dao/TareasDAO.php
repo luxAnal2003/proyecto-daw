@@ -24,6 +24,12 @@ class TareasDAO {
         return $resultados;
     }
 
+    public function selectAllHome(){
+        $sql = "SELECT * FROM tareas";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 
     public function selectByProyecto($proyectoId) {
         $sql = "SELECT id, nombre FROM tareas WHERE proyecto_id = :proyecto_id";

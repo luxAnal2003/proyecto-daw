@@ -13,19 +13,28 @@
     <table class="table mt-4">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Gestor</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($resultados as $proyecto) { ?>
                 <tr>
-                    <td><?php echo $proyecto->id; ?></td>
-                    <td><?php echo $proyecto->nombre; ?></td>
+                    <td><?= $proyecto->nombre ?></td>
+                    <td><?= $proyecto->descripcion ?></td>
+                    <td><?= $proyecto->usuario_creacion ?></td>
                     <td>
-                        <a href="index.php?c=Proyectos&f=view_edit&id=<?php echo $proyecto->id; ?>" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="index.php?c=Proyectos&f=delete&id=<?php echo $proyecto->id; ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a class="btn btn-warning btn-sm me-2" 
+                           href="index.php?c=Proyectos&f=view_edit&id=<?= $proyecto->id ?>">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a class="btn btn-danger btn-sm" 
+                           onclick="if(!confirm('¿Está seguro de eliminar la asignación?')) return false;" 
+                           href="index.php?c=Proyectos&f=delete&id=<?= $proyecto->id ?>">
+                           <i class="fas fa-trash-alt"></i> Eliminar
+                        </a>
                     </td>
                 </tr>
             <?php } ?>

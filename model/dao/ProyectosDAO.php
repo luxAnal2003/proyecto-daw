@@ -10,9 +10,11 @@ class ProyectosDAO {
 
     // Selecciona todos los proyectos, opcionalmente filtrados por un parámetro
     public function selectAll($parametro = '') {
-        $sql = "SELECT id, nombre FROM proyectos";
+        $sql = "SELECT p.id, p.nombre, p.descripcion, u.nombre as usuario_creacion 
+                FROM proyectos p 
+                INNER JOIN usuarios u ON p.usuario_creacion = u.id";
         if (!empty($parametro)) {
-            $sql .= " WHERE nombre LIKE :param";
+            $sql .= " WHERE p.nombre LIKE :param";
         }
         $stmt = $this->con->prepare($sql);
         if (!empty($parametro)) {
@@ -23,39 +25,43 @@ class ProyectosDAO {
     }
 
     // Selecciona un proyecto específico por su ID
+    
     public function selectOne($id) {
-        $sql = "SELECT nombre FROM proyectos WHERE id = :id";
+        $sql = "SELECT id, nombre, descripcion FROM proyectos WHERE id = :id";
         $stmt = $this->con->prepare($sql);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
-        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($resultado) {
-            return $resultado;
-        } else {
-            return array('nombre' => '');
-        }
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
+    
 
     // Inserta un nuevo proyecto
     public function insert($proyecto) {
-        $sql = "INSERT INTO proyectos (nombre) VALUES (:nombre)";
+        session_start();
+
+        $sql = "INSERT INTO proyectos (nombre, descripcion, usuario_creacion) 
+                VALUES (:nombre, :descripcion, :usuario_creacion)";
         $stmt = $this->con->prepare($sql);
         $data = [
-            'nombre' => $proyecto->getNombre()
+            'nombre' => $proyecto->getNombre(),
+            'descripcion' => $proyecto->getDescripcion(),
+            'usuario_creacion' => $_SESSION['usuario_id'] 
         ];
         return $stmt->execute($data);
     }
 
     // Actualiza un proyecto existente
     public function update($proyecto) {
-        $sql = "UPDATE proyectos SET nombre = :nombre WHERE id = :id";
+        $sql = "UPDATE proyectos SET nombre = :nombre, descripcion = :descripcion WHERE id = :id";
         $stmt = $this->con->prepare($sql);
         $data = [
             'nombre' => $proyecto->getNombre(),
+            'descripcion' => $proyecto->getDescripcion(),
             'id' => $proyecto->getId()
         ];
         return $stmt->execute($data);
     }
+    
 
     // Elimina un proyecto existente por su ID
     public function delete($id) {

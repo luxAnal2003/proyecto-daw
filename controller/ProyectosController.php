@@ -1,6 +1,6 @@
 <?php
 require_once 'model/dao/ProyectosDAO.php';
-require_once 'model/dto/Proyecto.php';
+require_once 'model/dto/Proyectos.php';
 
 class ProyectosController {
     private $model;
@@ -32,6 +32,8 @@ class ProyectosController {
             }
             $proyecto = new Proyecto();
             $proyecto->setNombre(htmlentities($_POST['nombre']));
+            $proyecto->setDescripcion(htmlentities($_POST['descripcion'])); // Agregar descripción
+            $proyecto->setUsuarioCreacion($_SESSION['usuario_id']); // Agregar ID de usuario de la sesión
 
             $exito = $this->model->insert($proyecto);
 
@@ -73,6 +75,7 @@ class ProyectosController {
             $proyecto = new Proyecto();
             $proyecto->setId(htmlentities($_POST['id']));
             $proyecto->setNombre(htmlentities($_POST['nombre']));
+            $proyecto->setDescripcion(htmlentities($_POST['descripcion']));
 
             $exito = $this->model->update($proyecto);
 
@@ -86,16 +89,19 @@ class ProyectosController {
 
     // Elimina un proyecto
     public function delete() {
-        $id = isset($_GET['id']) ? $_GET['id'] : 0;
-        if ($id <= 0) {
-            $_SESSION['mensaje'] = 'ID inválido para eliminar el proyecto.';
-            $_SESSION['color'] = 'danger';
-            header('Location:index.php?c=Proyectos&f=index');
-            exit();
-        }
+        $id = htmlentities($_REQUEST['id']);
+    
+        // comunicando con el modelo
         $exito = $this->model->delete($id);
-        $msj = $exito ? 'Proyecto eliminado exitosamente' : 'No se pudo eliminar el proyecto';
-        $color = $exito ? 'primary' : 'danger';
+        $msj = 'Asignación eliminada exitosamente';
+        $color = 'primary';
+        if (!$exito) {
+            $msj = "No se pudo eliminar la asignación";
+            $color = "danger";
+        }
+        if (!isset($_SESSION)) {
+            session_start();
+        };
         $_SESSION['mensaje'] = $msj;
         $_SESSION['color'] = $color;
         header('Location:index.php?c=Proyectos&f=index');

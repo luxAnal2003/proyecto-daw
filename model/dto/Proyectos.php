@@ -3,6 +3,8 @@
 class Proyecto {
     private $id;
     private $nombre;
+    private $descripcion;
+    private $usuarioCreacion;
 
     public function __construct() {}
 
@@ -23,6 +25,23 @@ class Proyecto {
     public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
+
+    public function getDescripcion() {
+        return $this->descripcion;
+    }
+    
+    public function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
+    }
+
+    public function getUsuarioCreacion() {
+        return $this->usuarioCreacion;
+    }
+
+    public function setUsuarioCreacion($usuarioCreacion) {
+        $this->usuarioCreacion = $usuarioCreacion;
+    }
 }
+
 
 ?>

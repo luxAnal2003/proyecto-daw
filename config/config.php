@@ -16,9 +16,11 @@ define("VTAREAS", "view/tareas/tareas.");
 // ruta de vistas modulo categorias
 define("VCATEGORIAS", "view/categorias/categorias.");
 
-
 // ruta de vistas modulo asignaciones
 define("VASIGNACIONES", "view/asignaciones/asignaciones.");
+
+// ruta de vistas modulo asignaciones
+define("VPROYECTOS", "view/proyectos/proyectos.");
 
 // conexion bb
 define("DBNAME","gestortareasproyectos");

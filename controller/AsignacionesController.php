@@ -85,7 +85,7 @@ class AsignacionesController {
             $asignacion->setTareaId(htmlentities($_POST['tarea']));
             $asignacion->setUsuarioId(htmlentities($_POST['usuario']));
             $asignacion->setProyectoId(htmlentities($_POST['proyecto']));
-            $asignacion->setGestorId($_SESSION['usuario_id']); // Asegúrate de que el ID del gestor esté en la sesión
+            $asignacion->setGestorId($_SESSION['usuario_id']); 
             $estado = (isset($_POST['estado'])) ? htmlentities($_POST['estado']) : 1;
             $asignacion->setEstado($estado);
             $fechaActual = new DateTime('NOW');
@@ -110,8 +110,6 @@ class AsignacionesController {
             exit();
         }
     }
-    
-
 
     public function delete() {
         // verificar datos -- si es que viene el parámetro id
@@ -167,7 +165,6 @@ class AsignacionesController {
         require_once VASIGNACIONES.'edit.php';
     }
 
-    
     // lee datos del formulario de editar asignación y lo actualiza en la BDD (llamando al modelo)
     public function edit() {
         $id = $_POST['id'];

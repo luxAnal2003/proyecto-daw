@@ -1,6 +1,5 @@
-<!-- autor: Luccy Sanchez Albarracin -->
+<!-- autor: Eliud -->
 <?php require_once HEADER; ?>
-
 
 <style>
     .container {

@@ -45,7 +45,7 @@ class AsignacionesDAO {
     // Inserta una nueva asignación
     public function insert($asignacion) {
         session_start();
-        $gestor_id = $_SESSION['usuario_id']; // Asegúrate de que el ID del gestor esté en la sesión
+        $gestor_id = $_SESSION['usuario_id']; 
         
         $sql = "INSERT INTO asignaciones (tarea_id, usuario_id, gestor_id, proyecto_id, fecha_asignacion, estado) 
                 VALUES (:tarea_id, :usuario_id, :gestor_id, :proyecto_id, :fecha_asignacion, :estado)";

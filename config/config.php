@@ -22,6 +22,9 @@ define("VASIGNACIONES", "view/asignaciones/asignaciones.");
 // ruta de vistas modulo asignaciones
 define("VPROYECTOS", "view/proyectos/proyectos.");
 
+define("VLISTAS", "view/listas/listas.");
+define("VLISTAS", "view/listas/tablero.");
+
 // conexion bb
 define("DBNAME","gestortareasproyectos");
 define("DBUSER","root");

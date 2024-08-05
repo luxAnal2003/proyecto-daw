@@ -34,7 +34,6 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
                 <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?c=index&f=index&p=nosotros">Nosotros</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.php?p=contacto">Contacto</a></li>
-                <a class="nav-link" href="/mvc/view/plantillas/plantillas.php">Plantillas</a></li>
                
                <?php
                 if (isset($_SESSION['usuario_id'])) {

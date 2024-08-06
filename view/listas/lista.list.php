@@ -222,7 +222,7 @@
                             </a>
                             <a class="btn btn-danger btn-sm" 
                                 onclick="if(!confirm('¿Está seguro de eliminar la lista?')) return false;" 
-                                href="index.php?c=Lista&f=destroy&id=<?php echo htmlspecialchars($fila['id']); ?>">
+                                href="index.php?c=Lista&f=delete&id=<?php echo htmlspecialchars($fila['id']); ?>">
                             <i class="fas fa-trash-alt"></i> Eliminar
                             </a>
                         </td>

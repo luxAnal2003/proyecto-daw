@@ -25,7 +25,7 @@ define("VPROYECTOS", "view/proyectos/proyectos.");
 define("VLISTAS", "view/listas/lista.");
 
 // conexion bb
-define("DBNAME","gestortareasproyectos");
-define("DBUSER","root");
-define("DBPASSWORD","");
+define("DBNAME","if0_37048898_gestortareasproyectos");
+define("DBUSER","if0_37048898");
+define("DBPASSWORD","w6SQI5G68Lr");
 

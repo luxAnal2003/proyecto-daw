@@ -1,7 +1,7 @@
 <?php
 class Conexion {
     public static function getConexion() {
-         $dsn = 'mysql:host=localhost;port=3307;dbname=' . DBNAME;
+        $dsn = 'mysql:host=sql203.infinityfree.com;dbname='.DBNAME;
         $conexion = null;
         try {
             $conexion = new PDO($dsn, DBUSER, DBPASSWORD);

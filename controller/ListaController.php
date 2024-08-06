@@ -79,19 +79,34 @@ class ListaController {
         require_once VLISTAS . 'list.php';
     }
 
-    public function destroy($id) {
-        Lista::delete($id);
-        header('Location: /tablero.php');
+    public function delete() {
+        $id = htmlentities($_REQUEST['id']);
+    
+        // comunicando con el modelo
+        $exito = $this->model->delete($id);
+        $msj = 'Asignación eliminada exitosamente';
+        $color = 'primary';
+        if (!$exito) {
+            $msj = "No se pudo eliminar la asignación";
+            $color = "danger";
+        }
+        if (!isset($_SESSION)) {
+            session_start();
+        };
+        $_SESSION['mensaje'] = $msj;
+        $_SESSION['color'] = $color;
+        // llamar a la vista
+        header('Location:index.php?c=Lista&f=index');
     }
     
     public function view_edit() {
         $id = $_GET['id'];
-        $lista = $this->model->selectOne($id);
-        if ($lista) {
+        $lista = $this->model->selectId($id);
+        if (!$lista) {
             $_SESSION['mensaje'] = "Lista no encontrada";
             $_SESSION['color'] = "danger";
             var_dump ($lista);
-            //header('Location:index.php?c=lista&f=index');
+            header('Location:index.php?c=lista&f=index');
             exit();
         }
         $titulo = "Editar Lista";

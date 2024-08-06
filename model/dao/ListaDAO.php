@@ -36,6 +36,16 @@ class ListaDAO{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function selectId($id) {
+        $sql = "SELECT * 
+                FROM listas 
+                WHERE id = :id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+    
     // Inserta una nueva lista
     public function insert($lista) {
         $sql = "INSERT INTO listas (nombre, descripcion, tipo, prioridad, estado) 
@@ -51,27 +61,26 @@ class ListaDAO{
         return $stmt->execute($data);
     }
 
-    public function update($lista) {
-        $sql = "UPDATE listas SET 
-                nombre = :nombre, 
-                descripcion = :descripcion, 
-                tipo = :tipo, 
-                prioridad = :prioridad, 
-                estado = :estado 
-                WHERE id = :id";
+    public function update($proyecto) {
+        $sql = "UPDATE listas SET nombre = :nombre, descripcion = :descripcion, tipo = :tipo, 
+        prioridad = :prioridad, 
+        estado = :estado WHERE id = :id";
         $stmt = $this->con->prepare($sql);
-        $stmt->bindValue(':id', $lista->getId());
-        $stmt->bindValue(':nombre', $lista->getNombre());
-        $stmt->bindValue(':descripcion', $lista->getDescripcion());
-        $stmt->bindValue(':tipo', $lista->getTipo());
-        $stmt->bindValue(':prioridad', $lista->getPrioridad());
-        $stmt->bindValue(':estado', $lista->getEstado());
-        return $stmt->execute();
+        $data = [
+            'nombre' => $proyecto->getNombre(),
+            'descripcion' => $proyecto->getDescripcion(),
+            'tipo' => $proyecto->getTipo(),
+            'prioridad' => $proyecto->getPrioridad(),
+            'estado' => $_POST['estado'], 
+            'id' => $proyecto->getId()
+        ];
+        return $stmt->execute($data);
     }
 
-    public static function delete($id){
-      global $pdo;
-      $stmt = $pdo->prepare("DELETE FROM listas WHERE id = ?");
-      $stmt->execute([$id]);
+    public function delete($id) {
+        $sql = "DELETE FROM listas WHERE id = :id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT); 
+        return $stmt->execute();
     }
 }

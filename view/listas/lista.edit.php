@@ -149,32 +149,32 @@
     <section class="seccionTablero">
         <h1>Editar Lista</h1>
         <form action="index.php?c=Lista&f=edit" method="post">
-            <input type="hidden" name="id" value="<?php echo $lista['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $lista->id?>">
             <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" id="nombre" value="<?= htmlspecialchars($lista->getNombre()) ?>" required>
+            <input type="text" name="nombre" id="nombre" value="<?= htmlspecialchars($lista->nombre) ?>" required>
             <br>
             <label for="descripcion">Descripción:</label>
-            <textarea name="descripcion" id="descripcion"><?= htmlspecialchars($lista->getDescripcion()) ?></textarea>
+            <textarea name="descripcion" id="descripcion"><?= htmlspecialchars($lista->descripcion) ?></textarea>
             <br>
             <label for="tipo">Tipo:</label>
             <select name="tipo" id="tipo" required>
-                <option value="Personal" <?= $lista->getTipo() == 'Personal' ? 'selected' : '' ?>>Personal</option>
-                <option value="Estudio" <?= $lista->getTipo() == 'Estudio' ? 'selected' : '' ?>>Estudio</option>
-                <option value="Trabajo" <?= $lista->getTipo() == 'Trabajo' ? 'selected' : '' ?>>Trabajo</option>
+                <option value="Personal" <?= $lista->tipo == 'Personal' ? 'selected' : '' ?>>Personal</option>
+                <option value="Estudio" <?= $lista->tipo == 'Estudio' ? 'selected' : '' ?>>Estudio</option>
+                <option value="Trabajo" <?= $lista->tipo == 'Trabajo' ? 'selected' : '' ?>>Trabajo</option>
             </select>
             <br>
             <label for="prioridad">Prioridad:</label>
             <select name="prioridad" id="prioridad" required>
-                <option value="Alta" <?= $lista->getPrioridad() == 'Alta' ? 'selected' : '' ?>>Alta</option>
-                <option value="Media" <?= $lista->getPrioridad() == 'Media' ? 'selected' : '' ?>>Media</option>
-                <option value="Baja" <?= $lista->getPrioridad() == 'Baja' ? 'selected' : '' ?>>Baja</option>
+                <option value="Alta" <?= $lista->prioridad == 'Alta' ? 'selected' : '' ?>>Alta</option>
+                <option value="Media" <?= $lista->prioridad == 'Media' ? 'selected' : '' ?>>Media</option>
+                <option value="Baja" <?= $lista->prioridad == 'Baja' ? 'selected' : '' ?>>Baja</option>
             </select>
             <br>
             <label for="estado">Estado:</label>
             <select name="estado" id="estado" required>
-                <option value="Nuevo" <?= $lista->getEstado() == 'Nuevo' ? 'selected' : '' ?>>Nuevo</option>
-                <option value="En Progreso" <?= $lista->getEstado() == 'En Progreso' ? 'selected' : '' ?>>En Progreso</option>
-                <option value="Completo" <?= $lista->getEstado() == 'Completo' ? 'selected' : '' ?>>Completo</option>
+                <option value="Nuevo" <?= $lista->estado == 'Nuevo' ? 'selected' : '' ?>>Nuevo</option>
+                <option value="En Progreso" <?= $lista->estado == 'En Progreso' ? 'selected' : '' ?>>En Progreso</option>
+                <option value="Completo" <?= $lista->estado == 'Completo' ? 'selected' : '' ?>>Completo</option>
             </select>
             <br>
             <input type="submit" value="Actualizar">

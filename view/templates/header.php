@@ -38,6 +38,7 @@ if(empty($_SESSION['user'])){ //simulacion manejo de variables de sesion
                <?php
                 if (isset($_SESSION['usuario_id'])) {
                     if($_SESSION['usuario_rol']==2 ){ //si el rol es gestor, podra ver esta seccion?>
+                        <li class="nav-item"><a class="nav-link" href="index.php?c=Lista&f=index">Tablero</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.php?c=Proyectos&f=index">Proyectos</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.php?c=Tareas&f=index">Tareas</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.php?c=Asignaciones&f=index">Asignaciones</a></li>

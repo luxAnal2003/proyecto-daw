@@ -1,4 +1,5 @@
-<?php require_once '../templates/header.php' ?>
+<!--autor: Ramírez Avilés Sebastián Emilio -->
+<?php require_once HEADER; ?>
 
     <style>
         /* Estilos por Sebastián Ramírez */
@@ -211,3 +212,4 @@
 </div>
 </main>
 </body>
+<?php require_once FOOTER; ?>

@@ -1,5 +1,5 @@
 <?php
-// dto data transfer object
+//autor: Robalino Aguilar Eliud Issac 
 class Tareas {
     //properties
     private $id;

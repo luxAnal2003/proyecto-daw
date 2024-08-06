@@ -55,6 +55,15 @@ CREATE TABLE IF NOT EXISTS Asignaciones (
     FOREIGN KEY (proyecto_id) REFERENCES Proyectos(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS listas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    tipo ENUM('Personal', 'Estudio', 'Trabajo') NOT NULL,
+    prioridad ENUM('Alta', 'Media', 'Baja') NOT NULL,
+    estado ENUM('Nuevo', 'En Progreso', 'Completo') NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 INSERT INTO Roles (nombre) VALUES 
 ('Administrador'),
@@ -115,9 +124,15 @@ INSERT INTO Asignaciones (tarea_id, usuario_id, gestor_id, proyecto_id) VALUES
 (7, 4, 3, 3),
 (8, 6, 3, 4);
 
+INSERT INTO listas (nombre, descripcion, tipo, prioridad, estado) VALUES 
+('Estudio de Matemáticas', 'Lista de tareas para el curso de matemáticas', 'Estudio', 'Media', 'En Progreso'),
+('Proyecto de Trabajo', 'Tareas para completar el proyecto en la oficina', 'Trabajo', 'Alta', 'Nuevo'),
+('Planificación Semanal', 'Organizar la semana con tareas y eventos', 'Personal', 'Baja', 'Completo');
+
 SELECT * FROM Roles;
 SELECT * FROM Usuarios;
 SELECT * FROM Proyectos;
 SELECT * FROM Asignaciones;
+SELECT * FROM listas;
 
 

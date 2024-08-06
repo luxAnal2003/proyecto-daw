@@ -1,5 +1,5 @@
 <?php
-//DTO Data tranferer Object 
+//autor: Ramírez Avilés Sebastián Emilio 
 class Lista {
     private $id;
     private $nombre;
@@ -43,6 +43,10 @@ class Lista {
         return $this->fechaCreacion;
     }
 
+    public function getPrioridad(){
+        return $this->prioridad;
+    }
+
     public function setId($id){
         $this->id=$id;
     }
@@ -62,7 +66,7 @@ class Lista {
     public function setPrioridad($prioridad){
         $this->prioridad = $prioridad;
     }
-
+    
     public function setEstado($estado){
         $this->estado=$estado;
     }

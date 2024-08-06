@@ -1,5 +1,5 @@
 <?php
-//autor: Sanchez Albarracin Luccy
+//autor: Sanchez Albarracin Luccy Veronica
 require_once 'config/Conexion.php';
 date_default_timezone_set('America/Guayaquil');
 
@@ -31,11 +31,9 @@ class AsignacionesDAO {
   
     // Selecciona una asignación específica por su ID
     public function selectOne($id) {
-        $sql = "SELECT a.id, t.id AS tarea_id, t.nombre AS tarea_nombre, u.id AS usuario_id, a.estado
-                FROM Asignaciones a
-                JOIN Tareas t ON a.tarea_id = t.id
-                JOIN Usuarios u ON a.usuario_id = u.id
-                WHERE a.id = :id";
+        $sql = "SELECT * 
+                FROM listas 
+                WHERE id = :id";
         $stmt = $this->con->prepare($sql);
         $stmt->bindValue(':id', $id);
         $stmt->execute();

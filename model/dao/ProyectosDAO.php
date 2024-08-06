@@ -1,5 +1,5 @@
 <?php
-//autor: Sanchez Albarracin Luccy
+//autor: Espinoza Vergara Miguel Ángel 
 require_once 'config/Conexion.php';
 
 class ProyectosDAO {

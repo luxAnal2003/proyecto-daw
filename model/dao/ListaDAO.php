@@ -1,56 +1,54 @@
 <?php 
-require_once __DIR__ . '/../../config.php';
-require_once __DIR__ . '/../dto/Lista.php';
+//autor: Ramírez Avilés Sebastián Emilio 
+require_once 'config/Conexion.php';
+require_once 'model/dto/Lista.php';
 
-class Lista{
+class ListaDAO{
     private $con;
 
     public function __construct() {
         $this->con = Conexion::getConexion();
     }
 
-    public static function all(){
-        global $pdo;
-        $stmt = $pdo->query("SELECT * FROM listas");
-        $listas=[];
-        while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-            $listas[]=new Lista(
-                $row['id'],
-                $row['nombre'],
-                $row['descripcion'],
-                $row['tipo'],
-                $row['prioridad'],
-                $row['estado'],
-                $row['fecha_creacion']
-            );
-        }
-        return $listas;
+    public function all() {
+        // SQL de la sentencia
+        $sql = "SELECT * FROM listas";
+        $stmt = $this->con->prepare($sql);
+        // Ejecutar la sentencia
+        $stmt->execute();
+        // Recuperar resultados
+        $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Retornar resultados
+        return $lista;
     }
 
-    public static function find($id){
-       global $pdo;
-       $stmt = $pdo->prepare("SELECT * FROM listas WHERE id = ?");
-       $stmt->execute([$id]);
-       $row = $stmt->fetch(PDO::FETCH_ASSOC);
-       if($row){
-        return new Lista(
-            $row['id'],
-            $row['nombre'],
-            $row['descripcion'],
-            $row['tipo'],
-            $row['prioridad'],
-            $row['estado'],
-            $row['fecha_creacion']
-        );
-       }
-       return null;
+    public function selectOne($parametro) {
+        $sql = "SELECT * FROM listas 
+                WHERE nombre LIKE :parametro 
+                OR descripcion LIKE :parametro 
+                OR tipo LIKE :parametro 
+                OR prioridad LIKE :parametro 
+                OR estado LIKE :parametro";
+        $stmt = $this->con->prepare($sql);
+        $parametro = "%$parametro%";
+        $stmt->bindParam(":parametro", $parametro);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function create($nombre, $descripcion, $tipo, $prioridad, $estado){
-        global $pdo;
-        $stmt= $pdo->prepare("INSERT INTO listas (nombre, descripcion, tipo, prioridad, estado) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$nombre, $descripcion, $tipo, $prioridad, $estado]);
-
+    // Inserta una nueva lista
+    public function insert($lista) {
+        $sql = "INSERT INTO listas (nombre, descripcion, tipo, prioridad, estado) 
+                VALUES (:nombre, :descripcion, :tipo, :prioridad, :estado)";
+        $stmt = $this->con->prepare($sql);
+        $data = [
+            'nombre' => $lista->getNombre(),
+            'descripcion' => $lista->getDescripcion(),
+            'tipo' => $lista->getTipo(),
+            'prioridad' => $lista->getPrioridad(),
+            'estado' => $_POST['estado']
+        ];
+        return $stmt->execute($data);
     }
 
     public static function update(Lista $lista){

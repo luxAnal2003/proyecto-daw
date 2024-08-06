@@ -1,6 +1,7 @@
 <?php
-require_once 'C:/xampp/htdocs/MVC/model/dao/ListaDAO.php';
-require_once 'C:/xampp/htdocs/MVC/model/dto/Lista.php';
+//autor: Ramírez Avilés Sebastián Emilio
+require_once 'model/dao/ListaDAO.php';
+require_once 'model/dto/Lista.php';
 
 class ListaController {
     private $model;
@@ -10,50 +11,120 @@ class ListaController {
     }
 
     public function index() {
-        $listas = Lista::all();
-        require __DIR__ . '/../view/listas/tablero.php';
+        $listas = $this->model->all("");
+        $titulo="Buscar listas";
+        require  VLISTAS.'list.php';
     }
 
     public function create() {
-        require '../view/listas/lista.create.php';
+        $titulo="Crear una nueva lista";
+        require  VLISTAS.'create.php';
     }
     
     public function store() {
-        // Validar y sanitizar datos del formulario
-        $nombre = $_POST['nombre'];
-        $descripcion = $_POST['descripcion'];
-        $tipo = $_POST['tipo'];
-        $prioridad = $_POST['prioridad'];
-        $estado = $_POST['estado'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') { // Insertar la lista
+            // Validar datos del formulario
+            if (empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['tipo']) || empty($_POST['prioridad']) || empty($_POST['estado'])) {
+                $_SESSION["mensaje"] = "Datos del formulario incompletos";
+                header('Location:index.php?c=Lista&f=index');
+                exit();
+            }
+    
+            $lista = new Lista(); // DTO
+            // Lectura de parámetros
+            $lista->setNombre(htmlentities($_POST['nombre']));
+            $lista->setDescripcion(htmlentities($_POST['descripcion']));
+            $lista->setTipo(htmlentities($_POST['tipo']));
+            $lista->setPrioridad(htmlentities($_POST['prioridad']));
+            $estadosPermitidos = ['Nuevo', 'En Progreso', 'Completo'];
+            $estado = htmlentities($_POST['estado']);
 
-        // Crear nueva lista
-        Lista::create($nombre, $descripcion, $tipo, $prioridad, $estado);
+            if (!in_array($estado, $estadosPermitidos)) {
+                $_SESSION["mensaje"] = "Estado inválido";
+                header('Location:tablero.php?action=index');
+                exit();
+            }
 
-        // Redirigir al listado
-        header('Location: tablero.php?action=index');
-        exit();
+            $lista->setEstado($estado);
+    
+            // Comunicar con el modelo
+            $exito = $this->model->insert($lista);
+    
+            $msj = 'Lista guardada exitosamente';
+            $color = 'primary';
+            if (!$exito) {
+                $msj = "No se pudo realizar el guardado";
+                $color = "danger";
+            }
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            $_SESSION['mensaje'] = $msj;
+            $_SESSION['color'] = $color;
+            // Llamar a la vista
+            header('Location: index.php?c=Lista&f=index'); // Redireccionamiento
+            exit();
+        }
     }
 
-    public function edit($id) {
-        $lista = Lista::find($id);
-        require '../view/listas/lista.edit.php';
-    }
-
-    public function update($id) {
-        $nombre = $_POST['nombre'];
-        $descripcion = $_POST['descripcion'];
-        $tipo = $_POST['tipo'];
-        $prioridad = $_POST['prioridad'];
-        $estado = $_POST['estado'];
-
-        $lista = new Lista($id, $nombre, $descripcion, $tipo, $prioridad, $estado);
-        Lista::update($lista);
-
-        header('Location: /tablero.php');
+    public function search() {
+        // Leer el parámetro de búsqueda enviado por el formulario
+        $parametro = (!empty($_POST["b"])) ? htmlentities($_POST["b"]) : "";
+        
+        // Comunicar con el modelo
+        $listas = $this->model->selectOne($parametro);
+        
+        // Llamar a la vista con los resultados
+        $titulo = "Buscar listas";
+        require_once VLISTAS . 'list.php';
     }
 
     public function destroy($id) {
         Lista::delete($id);
         header('Location: /tablero.php');
+    }public function view_edit() {
+        $id = $_GET['id'];
+        $lista = $this->model->selectOne($id);
+    
+        if (!$lista) {
+            $_SESSION['mensaje'] = "Lista no encontrada";
+            $_SESSION['color'] = "danger";
+            header('Location:index.php?c=lista&f=index');
+            exit();
+        }
+    
+        $titulo = "Editar Lista";
+        require_once VLISTAS.'edit.php';
     }
+    
+    public function edit() {
+        $id = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $descripcion = $_POST['descripcion'];
+        $tipo = $_POST['tipo'];
+        $prioridad = $_POST['prioridad'];
+        $estado = $_POST['estado'];
+    
+        $lista = new Lista();
+        $lista->setId($id);
+        $lista->setNombre($nombre);
+        $lista->setDescripcion($descripcion);
+        $lista->setTipo($tipo);
+        $lista->setPrioridad($prioridad);
+        $lista->setEstado($estado);
+    
+        $resultado = $this->model->update($lista);
+    
+        if ($resultado) {
+            $msj = 'Lista actualizada exitosamente';
+            $color = 'primary';
+            header('Location:index.php?c=Lista&f=index');
+        } else {
+            $msj = "No se pudo realizar la actualización";
+            $color = "danger";
+        }
+        exit();
+    }
+
+
 }

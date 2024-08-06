@@ -1,5 +1,5 @@
 <?php
-//autor: Sanchez Albarracin Luccy
+//autor: Espinoza Vergara Miguel Ángel 
 require_once 'model/dao/ProyectosDAO.php';
 require_once 'model/dto/Proyectos.php';
 

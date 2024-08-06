@@ -1,6 +1,5 @@
 <?php
-//autor: Sanchez Albarracin Luccy
-
+//autor: Sanchez Albarracin Luccy Veronica
 class Asignaciones {
     private $id;
     private $tarea_id;

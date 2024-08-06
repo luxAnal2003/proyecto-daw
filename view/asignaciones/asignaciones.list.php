@@ -42,7 +42,6 @@
         background-color: #274C77;
         color: white;
     }
-
 </style>
 <div class="container mt-4">
     <h2 class="mb-4"><?php echo $titulo; ?></h2>

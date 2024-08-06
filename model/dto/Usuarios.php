@@ -1,5 +1,5 @@
 <?php
-// DTO de Usuario
+//autor: Sanchez Albarracin Luccy Veronica
 class Usuarios {
     // Atributos de la clase
     private $id, $nombre, $email, $contrasena, $rol_id;

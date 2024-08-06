@@ -1,4 +1,5 @@
 <?php
+//autor: Sanchez Albarracin Luccy Veronica
 require_once 'config/Conexion.php';
 
 class UsuariosDAO {

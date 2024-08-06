@@ -1,4 +1,4 @@
-<!--autor: Sanchez Albarracin Luccy-->
+<!--autor: Espinoza Vergara Miguel Ángel -->
 <?php require_once HEADER; 
     // Verificar si el usuario tiene permiso para ver esta página
     if (isset($_SESSION['usuario_id'])) {

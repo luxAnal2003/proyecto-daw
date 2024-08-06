@@ -1,212 +1,94 @@
-<?php require_once '../templates/header.php' ?>
+<!-- autor: Ramírez Avilés Sebastián Emilio -->
+<?php require_once HEADER; ?>
 
-    <style>
-        /* Estilos por Sebastián Ramírez */
-    #contenedorPrincipalTab{
-    display: flex;
-    margin-top: 5%;
-    padding: 20px;
-    background-color: #FFFF;
-    gap: 20px;
-}
-
-.tablero {
-    display: flex;
-    gap: 10px;
-    max-width: 100%;
-    padding: 20px;
-  }
-  
-  .seccionTablero{
-    background-color: #E7ECEF;
-    border: 1px solid #ccc;
-  }
-  
- .contenedor {
-    background-color: #A3CEF1;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    width: 200px; 
-  }
-  
-  .seccionTablero #contenedor{
-    width: 24px;
-    height: 24px;
-  }
-
-  .contenedor h2 {
-    margin-top: 0;
-    font-size: 1.2em;
-  }
-  
-  .contenedorUnico {
-    padding: 10px;
-    width: 200px;
-    background-color: #28a745;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    font-size: 16px;
-    color: white; 
-  }
-  .contenedorUnico:hover {
-    background-color: #218838;
-  }
-
-  .cajaTxt {
-    background-color: #FFFF;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 0.9em;
-  }
-
-  button {
-    padding: 5px 10px;
-    border: none;
-    background-color: #28a745;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
+<style>
+    /* Estilos por Sebastián Ramírez */
+    .seccionTablero {
+        margin: 20px;
+        padding: 20px;
+        background-color: #fff;
     }
+    .seccionTablero h2 {
+        margin-top: 0;
+        font-size: 1.5em;
+        color: #333;
+    }
+    .seccionTablero label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+    .seccionTablero input[type="text"],
+    .seccionTablero textarea,
+    .seccionTablero select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .seccionTablero textarea {
+        resize: vertical;
+    }
+    .seccionTablero input[type="submit"] {
+        padding: 10px 15px;
+        border: none;
+        background-color: #28a745;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+    .seccionTablero input[type="submit"]:hover {
+        background-color: #218838;
+    }
+    .seccionTablero a {
+        display: inline-block;
+        margin-top: 10px;
+        color: #007bff;
+        text-decoration: none;
+    }
+    .seccionTablero a:hover {
+        text-decoration: underline;
+    }
+</style>
 
-  button:hover {
-    background-color: #218838;
-  }
+<div class="container">
+  <div class="seccionTablero">
+    <h2 class="mb-4"><?php echo $titulo; ?></h2>
+    <form action="index.php?c=Lista&f=store" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" required>
 
-  details {
-    margin-top: 20px;
-  }
+        <label for="descripcion">Descripción:</label>
+        <textarea name="descripcion" id="descripcion"></textarea>
 
-  summary {
-    cursor: pointer;
-  }
-        /* Lado izquierdo */
-        #contenedorPrincipal{
-        display: flex;
-        margin-top: 5%
-            }
+        <label for="tipo">Tipo:</label>
+        <select name="tipo" id="tipo" required>
+            <option value="Personal">Personal</option>
+            <option value="Estudio">Estudio</option>
+            <option value="Trabajo">Trabajo</option>
+        </select>
 
-        #sectionIzquierda{
-            display: flex;
-            margin-left: 15%;
-            flex-direction: column;
-            align-items: center;
-            background-color: #E7ECEF;
-            width: 13%;
-            height: 70vh;
-            border-radius: 5px;
-            }
+        <label for="prioridad">Prioridad:</label>
+        <select name="prioridad" id="prioridad" required>
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
+        </select>
 
-        .itemsSection{
-            display: flex;
-            background-color: #6096BA;
-            width: 95%;
-            height: 30px;
-            margin-bottom: 10px;
-            align-items: center;
-            border-radius: 5px;
-            font-size: 14px;
-            }
+        <label for="estado">Estado:</label>
+        <select name="estado" id="estado" required>
+            <option value="Nuevo">Nuevo</option>
+            <option value="En Progreso">En Progreso</option>
+            <option value="Completo">Completo</option>
+        </select>
 
-        .itemsSection img{
-            width: 18px;
-            height: 18px;
-            margin-right: 10px;
-            margin-left: 10px;
-        }
-        .itemsSection:nth-child(1){
-            margin-top: 20%;
-        }
-        .lineaDivisoria{
-        background-color: #8B8C89;
-            width: 100%;
-            height: 1px;
-            opacity: 50%;
-        }
-        .tituloDivisorio{
-            width: 100%;
-            height: 4%;
-            font-size: 10px;
+        <input type="submit" value="Guardar">
+    </form>
+    <a href="index.php?c=Lista&f=index">Volver</a>
+  </div>
+</div>
 
-        }
-        .tituloDivisorio p{
-            margin-left: 10px;
-            color: #858181;
-            font-weight: bold;
-        }
-        .itemsSection:hover{
-            background-color: #A3CEF1;
-            transition: 0.1s;
-        }
-
-    </style>
-</head>
-<body>
-    <main>
-        <div id="contenedorPrincipal">
-            <div id="sectionIzquierda">
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgTableros.png" alt="imagen tablero">
-                    <a href="tableros.html"><b>Tableros</b></a>
-                </div>
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgPlantillas.png" alt="imagen tablero">
-                    <a href="plantillas.html"><b>Plantillas</b></a>
-                </div>
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgInicio.png" alt="imagen tablero">
-                    <a href="index.html"><b>Inicio</b></a>
-                </div>
-                <div class="lineaDivisoria"></div>
-                <p>Espacios de Trabajo</p>
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgMiembros.png" alt="imagen tablero">
-                    <a href="board.html"><b>Board</b></a>
-                </div>
-                <p>Personalizar Plantillas</p>
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgMiembros.png" alt="imagen tablero">
-                    <a href="formPlantilla.php"><b>Personalizar</b></a>
-                </div>
-            </div>
-            <section class="seccionTablero">
-             <h1> Crear Lista </h1>
-             <form action="tablero.php?action=store" method="post">
-                <label for="nombre">Nombre:</label>
-                <input type="text" name="nombre" id="nombre" required>
-                <br>
-                <label for="descripcion">Descripción:</label>
-                <textarea name="descripcion" id="descripcion"></textarea>
-                <br>
-                <label for="tipo">Tipo:</label>
-                <select name="tipo" id="tipo" required>
-                    <option value="Personal">Personal</option>
-                    <option value="Estudio">Estudio</option>
-                    <option value="Trabajo">Trabajo</option>
-                </select>
-                <br>
-                <label for="prioridad">Prioridad:</label>
-                <select name="prioridad" id="prioridad" required>
-                    <option value="Alta">Alta</option>
-                    <option value="Media">Media</option>
-                    <option value="Baja">Baja</option>
-                </select>
-                <br>
-                <label for="estado">Estado:</label>
-                <select name="estado" id="estado" required>
-                    <option value="Nuevo">Nuevo</option>
-                    <option value="En Progreso">En Progreso</option>
-                    <option value="Completo">Completo</option>
-                </select>
-                <br>
-                <input type="submit" value="Guardar">
-            </form>
-            <a href="tablero.php">Volver</a>
-        </div>
-    </main>
-</body>
+<?php require_once FOOTER; ?>

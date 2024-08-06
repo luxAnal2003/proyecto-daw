@@ -1,3 +1,4 @@
+<!--autor: Robalino Aguilar Eliud Issac  -->
 <!-- incluimos  Encabezado -->
 <?php require_once HEADER; 
     // Verificar si el usuario tiene permiso para ver esta página

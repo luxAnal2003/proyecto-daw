@@ -1,6 +1,5 @@
 <?php
-//autor: Sanchez Albarracin Luccy
-
+//autor: Espinoza Vergara Miguel Ángel 
 class Proyecto {
     private $id;
     private $nombre;

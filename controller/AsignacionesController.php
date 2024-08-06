@@ -1,5 +1,5 @@
 <?php
-//autor: Sanchez Albarracin Luccy
+//autor: Sanchez Albarracin Luccy Veronica
 require_once 'model/dao/AsignacionesDAO.php';
 require_once 'model/dto/Asignaciones.php';
 require_once 'model/dao/TareasDAO.php';

@@ -146,38 +146,10 @@
         }
 
     </style>
-</head>
-<body>
-    <main>
-        <div id="contenedorPrincipal">
-            <div id="sectionIzquierda">
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgTableros.png" alt="imagen tablero">
-                    <a href="tableros.html"><b>Tableros</b></a>
-                </div>
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgPlantillas.png" alt="imagen tablero">
-                    <a href="plantillas.html"><b>Plantillas</b></a>
-                </div>
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgInicio.png" alt="imagen tablero">
-                    <a href="index.html"><b>Inicio</b></a>
-                </div>
-                <div class="lineaDivisoria"></div>
-                <p>Espacios de Trabajo</p>
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgMiembros.png" alt="imagen tablero">
-                    <a href="board.html"><b>Board</b></a>
-                </div>
-                <p>Personalizar Plantillas</p>
-                <div class="itemsSection">
-                    <img src="/mvc/assets/images/imgMiembros.png" alt="imagen tablero">
-                    <a href="formPlantilla.php"><b>Personalizar</b></a>
-                </div>
-            </div>
-            <section class="seccionTablero">
-            <h1>Editar Lista</h1>
-            <form action="tablero.php?action=update&id=<?= $listaDTO->getId() ?>" method="post">
+    <section class="seccionTablero">
+        <h1>Editar Lista</h1>
+        <form action="index.php?c=Lista&f=edit" method="post">
+            <input type="hidden" name="id" value="<?php echo $lista['id']; ?>">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre" value="<?= htmlspecialchars($lista->getNombre()) ?>" required>
             <br>
@@ -207,9 +179,5 @@
             <br>
             <input type="submit" value="Actualizar">
         </form>
-        <a href="tablero.php">Volver</a>
     </section>
-</div>
-</main>
-</body>
 <?php require_once FOOTER; ?>

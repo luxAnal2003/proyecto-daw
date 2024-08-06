@@ -30,10 +30,22 @@ class LoginController {
                 $_SESSION['usuario_nombre'] = $usuario->nombre;
                 $_SESSION['usuario_rol'] = $usuario->rol_id;
 
+                if ($usuario->rol_id == 1) {
+                    $_SESSION['usuario_rol'] = 1;
+                } else {
+                    header('Location: index.php');//?c=Usuario&f=index
+                }
                 // Redirigir según el rol del usuario
                 if ($usuario->rol_id == 2) {
                     // Rol 2 es gestor
-                    header('Location: index.php');//?c=Gestor&f=index
+                    $_SESSION['usuario_rol'] = 2;
+                } else {
+                    header('Location: index.php');//?c=Usuario&f=index
+                }
+                // Redirigir según el rol del usuario
+                if ($usuario->rol_id == 3) {
+                    // Rol 3 es usuario
+                    $_SESSION['usuario_rol'] = 3;
                 } else {
                     header('Location: index.php');//?c=Usuario&f=index
                 }

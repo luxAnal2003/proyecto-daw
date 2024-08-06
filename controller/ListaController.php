@@ -82,17 +82,18 @@ class ListaController {
     public function destroy($id) {
         Lista::delete($id);
         header('Location: /tablero.php');
-    }public function view_edit() {
+    }
+    
+    public function view_edit() {
         $id = $_GET['id'];
         $lista = $this->model->selectOne($id);
-    
-        if (!$lista) {
+        if ($lista) {
             $_SESSION['mensaje'] = "Lista no encontrada";
             $_SESSION['color'] = "danger";
-            header('Location:index.php?c=lista&f=index');
+            var_dump ($lista);
+            //header('Location:index.php?c=lista&f=index');
             exit();
         }
-    
         $titulo = "Editar Lista";
         require_once VLISTAS.'edit.php';
     }

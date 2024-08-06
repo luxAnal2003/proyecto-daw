@@ -51,17 +51,22 @@ class ListaDAO{
         return $stmt->execute($data);
     }
 
-    public static function update(Lista $lista){
-        global $pdo;
-        $stmt = $pdo->prepare("UPDATE listas SET nombre = ?, descripcion = ?, prioridad = ?, estado = ? WHERE id = ?");
-        $stmt->execute([
-            $lista->getNombre(), 
-            $lista->getDescripcion(),
-            $lista->getTipo(), 
-            $lista->getPrioridad(), 
-            $lista->getEstado(), 
-            $lista->getId()
-        ]);
+    public function update($lista) {
+        $sql = "UPDATE listas SET 
+                nombre = :nombre, 
+                descripcion = :descripcion, 
+                tipo = :tipo, 
+                prioridad = :prioridad, 
+                estado = :estado 
+                WHERE id = :id";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindValue(':id', $lista->getId());
+        $stmt->bindValue(':nombre', $lista->getNombre());
+        $stmt->bindValue(':descripcion', $lista->getDescripcion());
+        $stmt->bindValue(':tipo', $lista->getTipo());
+        $stmt->bindValue(':prioridad', $lista->getPrioridad());
+        $stmt->bindValue(':estado', $lista->getEstado());
+        return $stmt->execute();
     }
 
     public static function delete($id){
